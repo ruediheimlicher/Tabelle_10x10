@@ -1,0 +1,11 @@
+/* Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll */
+"Tastenmatrixfeld" = "Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll.";
+"Wertfeld" = "Summe der Ergebnisse auf dieser Zeile";
+"Ergebnisfeld" = "Summe aller Ergebnisse in der Tabelle";
+"Anzahlfeld" = "Anzahl der Aufgaben";
+"goArbeitsblattTaste" = "Arbeitsblatt erstellen.\nNach Änderungen wird ein schon geöffnetes Arbeitsblatt aktualisiert.";
+"goVorlageTaste" = "Grosse Vorlage für Folie erstellen";
+"Nummerfeld" = "Fortlaufende Nummer des Arbeitsblattes für die eingestellte Gruppe.\nDie Nummer wird gespeichert und bei jedem neuen Arbeitsblatt erhöht.";
+"Gruppefeld" = "Buchstaben A-F für eine Klassierung nach Schwierigkeitsgrad";
+"ClearTaste" = "Bereits aktivierte Tasten zurücksetzen";
+"ModSeg" = "Auswählen, ob die Tabelle als Hunderter- oder als Reihentabelle bearbeitet werden soll.\nUmschalten aktualisiert nur die Ergebnisse.";
