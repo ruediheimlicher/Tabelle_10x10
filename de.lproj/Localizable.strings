@@ -1,11 +1,28 @@
+/* No comment provided by engineer. */
+"Anzahlfeld" = "Anzahl der Aufgaben";
+
+/* No comment provided by engineer. */
+"ClearTaste" = "Bereits aktivierte Tasten zurücksetzen";
+
+/* No comment provided by engineer. */
+"Ergebnisfeld" = "Summe aller Ergebnisse in der Tabelle";
+
+/* No comment provided by engineer. */
+"Gruppefeld" = "Buchstaben A-F für eine Klassierung nach Schwierigkeitsgrad";
+
+/* No comment provided by engineer. */
+"Nummerfeld" = "Fortlaufende Nummer des Arbeitsblattes für die eingestellte Gruppe.
+Die Nummer wird gespeichert und bei jedem neuen Arbeitsblatt erhöht.";
+
 /* Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll */
 "Tastenmatrixfeld" = "Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll.";
+
+/* No comment provided by engineer. */
 "Wertfeld" = "Summe der Ergebnisse auf dieser Zeile";
-"Ergebnisfeld" = "Summe aller Ergebnisse in der Tabelle";
-"Anzahlfeld" = "Anzahl der Aufgaben";
-"goArbeitsblattTaste" = "Arbeitsblatt erstellen.\nNach Änderungen wird ein schon geöffnetes Arbeitsblatt aktualisiert.";
+
+/* No comment provided by engineer. */
+"goArbeitsblattTaste" = "Arbeitsblatt erstellen";
+
+/* No comment provided by engineer. */
 "goVorlageTaste" = "Grosse Vorlage für Folie erstellen";
-"Nummerfeld" = "Fortlaufende Nummer des Arbeitsblattes für die eingestellte Gruppe.\nDie Nummer wird gespeichert und bei jedem neuen Arbeitsblatt erhöht.";
-"Gruppefeld" = "Buchstaben A-F für eine Klassierung nach Schwierigkeitsgrad";
-"ClearTaste" = "Bereits aktivierte Tasten zurücksetzen";
-"ModSeg" = "Auswählen, ob die Tabelle als Hunderter- oder als Reihentabelle bearbeitet werden soll.\nUmschalten aktualisiert nur die Ergebnisse.";
+

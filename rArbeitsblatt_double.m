@@ -72,7 +72,7 @@ mode=1;
 {
    if ([[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"])
    {
-      NSLog(@"TastenwerteAktion double: note: %@",[[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"]description]);
+      //NSLog(@"TastenwerteAktion double: note: %@",[[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"];
       //NSLog(@"TastenwerteAktion: tempArray: %@",[tempArray description]);
       
@@ -351,7 +351,7 @@ r.size.width -=2;
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   NSLog(@"AB Druckfeld_double TastenwerteAktion note: %@",[[note userInfo]description]);
+   //NSLog(@"AB Druckfeld_double TastenwerteAktion note: %@",[[note userInfo]description]);
    if ([[[note userInfo]objectForKey:@"druckdatendic"] objectForKey:@"Anzahl"] && [[[[note userInfo]objectForKey:@"druckdatendic"] objectForKey:@"Anzahl"]intValue])
    {
       
@@ -417,7 +417,7 @@ r.size.width -=2;
 
 - (void)printSerie:(NSDictionary*)druckdaten
 {
-   NSLog(@"Arbeitsblatt_double printSerie");
+   //NSLog(@"Arbeitsblatt_double printSerie");
 NSDictionary* printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
 [self BlattDruckenMitDic:printDic];
 
@@ -426,7 +426,7 @@ NSDictionary* printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"dr
 - (IBAction)printDocument:(id)sender
 {
 NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
-//[self BlattDruckenMitDic:NULL];
+[self BlattDruckenMitDic:NULL];
 
 }
 

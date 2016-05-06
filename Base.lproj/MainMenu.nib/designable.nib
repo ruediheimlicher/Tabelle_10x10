@@ -222,15 +222,35 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="363">
-                        <rect key="frame" x="307" y="484" width="74" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="osi-HO-MCe">
+                        <rect key="frame" x="373" y="29" width="37" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ugW-fM-zML">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="449-Sq-nD0">
+                        <rect key="frame" x="318" y="483" width="62" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Nummer:" id="385">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Gruppe:" id="Q3C-H9-jHF">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button id="1pH-Dn-QqL">
+                        <rect key="frame" x="186" y="50" width="159" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Weitere Kopien" bezelStyle="regularSquare" imagePosition="left" inset="2" id="rej-hi-5rO">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="reportMoreCopies:" target="213" id="KeD-aT-NqO"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
@@ -244,6 +264,7 @@
                 <outlet property="goArbeitsblattTaste" destination="352" id="354"/>
                 <outlet property="goVorlageTaste" destination="355" id="358"/>
                 <outlet property="menu" destination="29" id="eS0-Vz-QPT"/>
+                <outlet property="morecopies" destination="1pH-Dn-QqL" id="bph-Gn-Tff"/>
             </connections>
         </window>
     </objects>
