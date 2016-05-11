@@ -6,7 +6,7 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-   //NSLog(@"rVorlagerahmen init");
+   //dLog("rVorlagerahmen init");
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
@@ -22,7 +22,7 @@
    {
       [TastenwertArray addObject:[NSNumber numberWithInt:0]];
    }
-   //NSLog(@"rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
+   //dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
    return self;
    
    /*
@@ -38,12 +38,12 @@
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   //NSLog(@"Vorlage TastenwerteAktion");
+   //dLog("Vorlage TastenwerteAktion");
    if ([[note userInfo]objectForKey:@"Tastenwerte"])
    {
-      //NSLog(@"Vorlage TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
+      //dLog("Vorlage TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
-      //NSLog(@"TastenwerteAktion: tempArray: %@",[tempArray description]);
+      //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
       [TastenwertArray setArray:tempArray];
       
@@ -53,7 +53,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //NSLog(@"rVorlagerahmen drawRect ");
+   //dLog("rVorlagerahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    [[NSColor blackColor]set];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
@@ -61,7 +61,7 @@
    NSRect rr=NSMakeRect(20,40,20,20);
    //[NSBezierPath strokeRect:rr];
    
-   //NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    //Tastenwerte=[[[NSArray alloc]init]retain];
    int offsetx=32;
    int offsety=60;
@@ -72,7 +72,7 @@
    //Tastenfeld.origin.x=10;
    //Tastenfeld.origin.y=10;
    
-   //NSLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+   //dLog("TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
    int i, k;
    /*
     [Wertarray removeAllObjects];
@@ -110,17 +110,17 @@
                {
                   case 0: // Hundertertabelle
                      zeilenwert+=(10*(9-i))+(k+1);
-                     //NSLog(@"Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                   case 1: //Reihentabelle
                      zeilenwert+=((10-i))*(k+1);
-                     //NSLog(@"Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                      
                }//switch mode
                
                
-               //NSLog(@"zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+               //dLog("zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
             }
             //else
             {
@@ -130,7 +130,7 @@
          }
          [Kreis setLineWidth:lw];
       }//for k
-      //NSLog(@"zeile: %d zeilenwert: %d",i, zeilenwert);
+      //dLog("zeile: %d zeilenwert: %d",i, zeilenwert);
       
       Wertfeld=Tastenfeld;
       Wertfeld.origin.x+=2*d;
@@ -193,7 +193,7 @@
    
    NSRect r;
    //r=[Titelrahmen frame];
-   //NSLog(@"Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    //[self addSubview:Aufgaberahmen];
    //[Titelfeld setStringValue:@"Reihentabelle"];
    
@@ -202,7 +202,7 @@
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   //NSLog(@"VorlageDruckfeld TastenwerteAktion");
+   //dLog("VorlageDruckfeld TastenwerteAktion");
    if ([[note userInfo]objectForKey:@"Anzahl"] && [[[note userInfo]objectForKey:@"Anzahl"]intValue])
    {
       if ([[note userInfo]objectForKey:@"Gruppe"])
@@ -245,7 +245,7 @@
 
 - (void)awakeFromNib
 {
-   //NSLog(@"Vorlage awake");
+   //dLog("Vorlage awake");
    
    
 }
@@ -254,7 +254,7 @@
 
 - (IBAction)printDocument:(id)sender
 {
-   //NSLog(@"printDocument");
+   //dLog("printDocument");
    [self VorlageDrucken];
    
 }
@@ -265,7 +265,7 @@
 {
    
    //NSTextView* DruckView=[[[NSTextView alloc]init]autorelease];
-   //NSLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
+   //DLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
    NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
    
    [PrintInfo setOrientation:NSPortraitOrientation];
@@ -277,7 +277,7 @@
    NSRect bounds=[PrintInfo imageablePageBounds];
    
    int x=bounds.origin.x;int y=bounds.origin.y;int h=bounds.size.height;int w=bounds.size.width;
-   //NSLog(@"Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
+   //dLog("Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
    NSSize Papiergroesse=[PrintInfo paperSize];
    int leftRand=(Papiergroesse.width-bounds.size.width)/2;
    int topRand=(Papiergroesse.height-bounds.size.height)/2;
@@ -292,7 +292,7 @@
    
    int platzV=(Papiergroesse.height-bounds.size.height);
    
-   //NSLog(@"platzH: %d  platzV %d",platzH,platzV);
+   //dLog("platzH: %d  platzV %d",platzH,platzV);
    
    int botRand=(Papiergroesse.height-topRand-bounds.size.height-1);
    
@@ -308,7 +308,7 @@
    int linkerRand=(int)[PrintInfo leftMargin];
    int rechterRand=[PrintInfo rightMargin];
    
-   //NSLog(@"linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
+   //dLog("linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
    NSRect DruckFeld=NSMakeRect(linkerRand, obererRand, DruckbereichH, DruckbereichV);
    
    //DruckView=[[NSView alloc]initWithFrame:DruckFeld];
@@ -324,7 +324,7 @@
    NSPrintOperation* DruckOperation;
    DruckOperation=[NSPrintOperation printOperationWithView: VorlageDruckfeld
                                                  printInfo:PrintInfo];
-   [DruckOperation setShowPanels:YES];
+   [DruckOperation setShowsPrintPanel:YES];
    [DruckOperation runOperation];
    
 }

@@ -10,7 +10,7 @@
    //NSMutableArray* Wertarray;
    int mode;
 }
-- (void)setMatrix:(NSArray*)Tastenwerte;
+//- (void)setMatrix:(NSArray*)Tastenwerte;
 @end
 
 

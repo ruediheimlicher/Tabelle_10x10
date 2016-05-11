@@ -26,10 +26,10 @@
 {
    NSMutableDictionary* DruckDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    [DruckDic setObject:[NSNumber numberWithInt:[AnzahlBox intValue]] forKey:@"Anzahl"];
-
+   
    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
    [nc postNotificationName:@"anzahlkopien" object:self userInfo:DruckDic];
-
+   
    [NSApp stopModalWithCode:0];
    
    [[self window] orderOut:NULL];
@@ -45,7 +45,7 @@
 
 - (void)setAnzahlKopien:(int)dieAnzahl
 {
-   NSLog(@"setAnzahlKopien: %d",dieAnzahl);
+   //dLog("setAnzahlKopien: %d",dieAnzahl);
    [AnzahlBox setIntValue:dieAnzahl];
    
 }
@@ -62,7 +62,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //NSLog(@"rRahmen drawRect ");
+   //dLog("rRahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
@@ -71,8 +71,7 @@
    [[NSColor grayColor]set];
    [NSBezierPath strokeRect:r];
    
-   //NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
-   
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 }
 
 
@@ -83,7 +82,7 @@
 @implementation rAufgabeRahmen
 - (id)initWithFrame:(NSRect)frame
 {
-   //NSLog(@"rAufgabeRahmen init");
+   //dLog("rAufgabeRahmen init");
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
@@ -92,7 +91,7 @@
               name:@"Tastenwerte"
             object:nil];
    
-    
+   
    
    TastenwertArray=[[NSMutableArray alloc]initWithCapacity:100];
    int i;
@@ -100,7 +99,7 @@
    {
       [TastenwertArray addObject:[NSNumber numberWithInt:0]];
    }
-   //NSLog(@"rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
+   //dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
    return self;
    
    /*
@@ -118,9 +117,9 @@
 {
    if ([[note userInfo]objectForKey:@"Tastenwerte"])
    {
-      //NSLog(@"TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
+      //dLog("TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
-      //NSLog(@"TastenwerteAktion: tempArray: %@",[tempArray description]);
+      //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
       [TastenwertArray setArray:tempArray];
       if ([[note userInfo]objectForKey:@"Mode"])
@@ -135,7 +134,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //NSLog(@"rRahmen drawRect ");
+   //dLog("rRahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    [[NSColor grayColor]set];
@@ -144,7 +143,7 @@
    
    //[NSBezierPath strokeRect:rr];
    
-   //NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    //Tastenwerte=[[[NSArray alloc]init]retain];
    int offsetx=40;
    int offsety=32;
@@ -155,7 +154,7 @@
    //Tastenfeld.origin.x=10;
    //Tastenfeld.origin.y=10;
    
-   //NSLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+   //dLog("TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
    int i, k;
    int d=26;
    int kar=14;
@@ -189,12 +188,12 @@
                   case 0: // Hundertertabelle
                      zeilenwert+=(10*(9-i))+(k+1);
                      summe +=(10*(9-i))+(k+1);
-                     //NSLog(@"Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                   case 1: //Reihentabelle
                      zeilenwert+=((10-i))*(k+1);
                      summe += ((10-i))*(k+1);
-                     //NSLog(@"Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                      
                }//switch mode
@@ -227,7 +226,7 @@
           [self addSubview:Taste];
           */
       }//for k
-      //NSLog(@"zeile: %d zeilenwert: %d",i, zeilenwert);
+      //dLog("zeile: %d zeilenwert: %d",i, zeilenwert);
       
       Wertfeld=Tastenfeld;
       Wertfeld.origin.x+=2*d;
@@ -332,7 +331,7 @@
 @implementation rErgebnisRahmen
 - (id)initWithFrame:(NSRect)frame
 {
-   //NSLog(@"rAufgabeRahmen init");
+   //dLog("rAufgabeRahmen init");
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
@@ -349,7 +348,7 @@
    {
       [TastenwertArray addObject:[NSNumber numberWithInt:0]];
    }
-   //NSLog(@"rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
+   //dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
    return self;
    
    Wertarray=[[NSMutableArray alloc]initWithCapacity:10];
@@ -365,9 +364,9 @@
 {
    if ([[note userInfo]objectForKey:@"Tastenwerte"])
    {
-      //NSLog(@"TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
+      //dLog("TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
-      //NSLog(@"TastenwerteAktion: tempArray: %@",[tempArray description]);
+      //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
       [TastenwertArray setArray:tempArray];
       if ([[note userInfo]objectForKey:@"Mode"])
@@ -382,13 +381,13 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //NSLog(@"rRahmen drawRect ");
+   //dLog("rRahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    [[NSColor grayColor]set];
    [NSBezierPath strokeRect:r];
    
-   //NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    //Tastenwerte=[[[NSArray alloc]init]retain];
    int offsetx=40;
    int offsety=28;
@@ -399,7 +398,7 @@
    //Tastenfeld.origin.x=10;
    //Tastenfeld.origin.y=10;
    
-   //NSLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+   //dLog("TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
    int i, k;
    int summe=0;
    [Wertarray removeAllObjects];
@@ -440,21 +439,21 @@
                      feldwert=(10*(9-i))+(k+1);
                      zeilenwert+=(10*(9-i))+(k+1);
                      
-                     //NSLog(@"Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                   case 1: //Reihentabelle
                      feldwert=((10-i))*(k+1);
                      zeilenwert+=((10-i))*(k+1);
-                     //NSLog(@"Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     //dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                      
                }//switch mode
                NSPoint zahlpunkt=Kreisfeld.origin;;
-               zahlpunkt.y+=d/5.0;
-               zahlpunkt.x+=d/8.0;
+               zahlpunkt.y+=d/6.0;
+               zahlpunkt.x+=d/16.0;
                //NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 9];
                //NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:StundenFont forKey:NSFontAttributeName];
-               NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 10];
+               NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 12];
                NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:ZahlFont forKey:NSFontAttributeName];
                int offset=0;
                NSString* ZahlString=[[NSNumber numberWithInt:feldwert]stringValue];
@@ -474,16 +473,18 @@
                
                //zeilenwert+=((10-i))*(k+1);
                //[wertString setIntValue:zeilenwert];
-               //NSLog(@"zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+               //dLog("zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+               [[NSColor blackColor]set];
+               [Kreis stroke];
             }
-            //else
+            else
             {
-               [[NSColor grayColor]set];
+               [[NSColor lightGrayColor]set];
                [Kreis stroke];
             }
          }
       }//for k
-      //NSLog(@"zeile: %d zeilenwert: %d",i, zeilenwert);
+      //dLog("zeile: %d zeilenwert: %d",i, zeilenwert);
       Wertfeld=Tastenfeld;
       Wertfeld.origin.x+=2*d;
       Wertfeld.origin.y+=3;
@@ -591,7 +592,7 @@
    
    NSRect r;
    r=[Titelrahmen frame];
-   //NSLog(@"Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    //[self addSubview:Aufgaberahmen];
    //[Titelfeld setStringValue:@"Reihentabelle"];
    //[ErgebnisTitelfeld setStringValue:@"Reihentabelle"];
@@ -600,14 +601,14 @@
    //[self addSubview:Gruppefeld];
    Grupperahmen=[Gruppefeld frame];
    r=Grupperahmen;
-   //NSLog(@"Druckfeld awake drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("Druckfeld awake drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    
 }
 
 
 - (void)drawRect:(NSRect)rect
 {
-   //NSLog(@"Arbeitsblatt Druckfeld drawRect ");
+   //dLog("Arbeitsblatt Druckfeld drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
    [FeldFarbe set];
@@ -618,14 +619,14 @@
    NSRect r=[Gruppefeld bounds];
    r.size.width -=2;
    [NSBezierPath strokeRect:r];
-   //NSLog(@"Druckfeld drawRect Grupperahmen: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //dLog("Druckfeld drawRect Grupperahmen: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
    
 }
 
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   //NSLog(@"AB Druckfeld TastenwerteAktion note: %@",[[note userInfo]description]);
+   //dLog("AB Druckfeld TastenwerteAktion note: %@",[[note userInfo]description]);
    DruckdatenDic = [NSDictionary dictionaryWithDictionary:[note userInfo]];
    if ([[note userInfo]objectForKey:@"Anzahl"] && [[[note userInfo]objectForKey:@"Anzahl"]intValue])
    {
@@ -680,7 +681,7 @@
 - (id)init
 {
    self=[super initWithWindowNibName:@"Arbeitsblatt"];
-   //NSLog(@"rArbeitsblatt ");
+   //dLog("rArbeitsblatt ");
    
    
    // Add your subclass-specific initialization here.
@@ -691,7 +692,7 @@
 
 - (void)awakeFromNib
 {
-   //NSLog(@"Arbeitsblatt awake");
+   //dLog("Arbeitsblatt awake");
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
    
@@ -699,14 +700,62 @@
           selector:@selector(AnzahlKopienAktion:)
               name:@"anzahlkopien"
             object:nil];
-
+   
    
    
 }
+- (void)clearDouble
+{
+   if (Arbeitsblattfenster_double)
+   {
+   [[Arbeitsblattfenster_double window] orderOut:nil];
+   }
+}
+
+- (IBAction)reportDrucken :(id)sender
+{
+   AnzahlKopien = [moreCopyCheck state];
+   DruckKnopf.hidden = YES;
+   moreCopyCheck.hidden = YES;
+   [self BlattDruckenMitDicArray:NULL];
+   
+   return;
+   
+   if (AnzahlKopien)
+   {
+      //dLog("printOperationDidRun druckdatenDic: %@",[Druckfeld druckdatenDic]);
+      
+      if (!Arbeitsblattfenster_double)
+      {
+         Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
+         
+      }
+      [Arbeitsblattfenster_double showWindow:self];
+      
+      NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
+      [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
+      [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
+      
+      NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+      
+      // Tastenwerte an Arbeitsblatt_double schicken
+      [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
+      
+      [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
+      
+   }
+
+}
+
+- (IBAction)reportMoreCopies:(id)sender
+{
+   
+}
+
 
 - (void) AnzahlKopienAktion:(NSNotification*)note
 {
-   NSLog(@"AnzahlKopienAktion: note: %@",[note userInfo]);
+   //dLog("AnzahlKopienAktion: note: %@",[note userInfo]);
    AnzahlKopien = [[[note userInfo]objectForKey:@"morecopies"]intValue];
    return;
    
@@ -714,29 +763,29 @@
    
    if (!Arbeitsblattfenster_double)
 	  {
-       // Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
+        // Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
         
      }
-//   [Arbeitsblattfenster_double showWindow:self];
+   //   [Arbeitsblattfenster_double showWindow:self];
    
-  // AnzahlKopien= [EinstellungenFenster AnzahlKopien];
+   // AnzahlKopien= [EinstellungenFenster AnzahlKopien];
    if (AnzahlKopien%2) // ungerade
    {
       AnzahlKopien++;
    }
    AnzahlKopien /=2;
    
-   NSLog(@"AnzahlKopienAktion AnzahlKopien: %d",AnzahlKopien);
+   //dLog("AnzahlKopienAktion AnzahlKopien: %d",AnzahlKopien);
    NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
    [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
    
    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
-//   [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
+   //   [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
    
    
-//   [Arbeitsblattfenster_double printSerie:DruckdatenDic];
-
+   //   [Arbeitsblattfenster_double printSerie:DruckdatenDic];
+   
    
 }
 
@@ -744,7 +793,10 @@
 - (IBAction)printDocument:(id)sender
 {
    // Arbeitsblatt mit lsg drucken. Anschliessend Dialog aufrufen, um anz Kopien abzufragen und diese zu drucken
-   NSLog(@"printDocument AnzahlKopien: %d",AnzahlKopien);
+   // dLog("printDocument AnzahlKopien: %d",AnzahlKopien);
+   DruckKnopf.hidden = YES;
+   moreCopyCheck.hidden = YES;
+
    [self BlattDruckenMitDicArray:NULL];
    //EinstellungenSheet =[[rEinstellungenFenster alloc]init];
    
@@ -762,90 +814,39 @@
    return;
    
    // verschoben in printOperationDidRun
-  if (AnzahlKopien)
-   {
-
-   if (!Arbeitsblattfenster_double)
-	  {
-        Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
-        
-     }
-   [Arbeitsblattfenster_double showWindow:self];
-
-    /*
-   EinstellungenFenster =[[rEinstellungenFenster alloc]init];
-   NSModalSession EinstellungenSession=[NSApp beginModalSessionForWindow:[EinstellungenFenster window]];
-   [EinstellungenFenster setAnzahlKopien:AnzahlKopien];
-   
-     long antwort= [NSApp   runModalForWindow: [EinstellungenFenster window]];
-   
-   NSLog(@"antwort: %ld",antwort);
-   if (antwort==0)
-   {
-     
-   }
-   
-   [NSApp endModalSession:EinstellungenSession];
-
-   AnzahlKopien= [EinstellungenFenster AnzahlKopien];
- */
-   if (AnzahlKopien%2) // ungerade
-   {
-      AnzahlKopien++;
-   }
-   AnzahlKopien /=2;
-   NSLog(@"printDok AnzahlKopien: %d",AnzahlKopien);
-   
-    NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
-   [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
-   [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
-   
-   NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
-   
-   // Tastenwerte an Arbeitsblatt_double schicken
-   [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
-
-   [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
-   [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
-   
-
- //  [nc postNotificationName:@"printserie" object:self userInfo:NotificationDic];
-   
-   //NSLog(@"Druckdaten aus Druckfeld: %@",[Druckfeld druckdatenDic]);
-   [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
-  
-     
-     }
-   
-   
-}
-
-
-
-- (void)printOperationDidRun:(NSPrintOperation *)printOperation  success:(BOOL)success  contextInfo:(void *)contextInfo
-{
-   DLog(@"printOperationDidRun ");
-   NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
-
-   NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
-   [NotificationDic setObject:[NSNumber numberWithInt:1] forKey:@"printok"];
-
-   // Notific an Einstellungen schicken
-   [nc postNotificationName:@"endprint" object:self userInfo:NotificationDic];
-   
- 
-   // doble drucken
-   
    if (AnzahlKopien)
    {
-      NSLog(@"printOperationDidRun druckdatenDic: %@",[Druckfeld druckdatenDic]);
-
+      
       if (!Arbeitsblattfenster_double)
       {
          Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
          
       }
       [Arbeitsblattfenster_double showWindow:self];
+      
+      /*
+       EinstellungenFenster =[[rEinstellungenFenster alloc]init];
+       NSModalSession EinstellungenSession=[NSApp beginModalSessionForWindow:[EinstellungenFenster window]];
+       [EinstellungenFenster setAnzahlKopien:AnzahlKopien];
+       
+       long antwort= [NSApp   runModalForWindow: [EinstellungenFenster window]];
+       
+       dLog("antwort: %ld",antwort);
+       if (antwort==0)
+       {
+       
+       }
+       
+       [NSApp endModalSession:EinstellungenSession];
+       
+       AnzahlKopien= [EinstellungenFenster AnzahlKopien];
+       */
+      if (AnzahlKopien%2) // ungerade
+      {
+         AnzahlKopien++;
+      }
+      AnzahlKopien /=2;
+      //dLog("printDok AnzahlKopien: %d",AnzahlKopien);
       
       NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
       [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
@@ -855,10 +856,67 @@
       
       // Tastenwerte an Arbeitsblatt_double schicken
       [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
-
+      
+      [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
+      [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
+      
+      
+      //  [nc postNotificationName:@"printserie" object:self userInfo:NotificationDic];
+      
+      //dLog("Druckdaten aus Druckfeld: %@",[Druckfeld druckdatenDic]);
       [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
+      
+      
    }
    
+   
+}
+
+- (void)printOperationDidRun:(NSPrintOperation *)printOperation  success:(BOOL)success  contextInfo:(void *)contextInfo
+{
+   DLog(@"printOperationDidRun success: %d",success);
+   if (success)
+   {
+      DLog(@"printOperationDidRun ");
+      NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
+      
+      NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+      [NotificationDic setObject:[NSNumber numberWithInt:1] forKey:@"printok"];
+      
+      // Notific an Einstellungen schicken
+      [nc postNotificationName:@"endprint" object:self userInfo:NotificationDic];
+      
+      
+      // doble drucken
+      
+      if (AnzahlKopien)
+      {
+         //dLog("printOperationDidRun druckdatenDic: %@",[Druckfeld druckdatenDic]);
+         
+         if (!Arbeitsblattfenster_double)
+         {
+            Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
+            
+         }
+         [Arbeitsblattfenster_double showWindow:self];
+         
+         NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
+         [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
+         [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
+         
+         NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+         
+         // Tastenwerte an Arbeitsblatt_double schicken
+         [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
+         
+         [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
+
+      }
+ 
+   }
+   DruckKnopf.hidden = NO;
+   moreCopyCheck.hidden = NO;
+
 }
 
 
@@ -866,9 +924,9 @@
 {
    
    //NSTextView* DruckView=[[[NSTextView alloc]init]autorelease];
-   //NSLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
+   //DLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
    NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
-   //NSLog (@"BlattDruckenMitDicArray PrintInfo: %@",PrintInfo);
+   //DLog (@"BlattDruckenMitDicArray PrintInfo: %@",PrintInfo);
    
    [PrintInfo setOrientation:NSPortraitOrientation];
    [PrintInfo setHorizontalPagination: NSAutoPagination];
@@ -879,7 +937,7 @@
    NSRect bounds=[PrintInfo imageablePageBounds];
    
    int x=bounds.origin.x;int y=bounds.origin.y;int h=bounds.size.height;int w=bounds.size.width;
-   //NSLog(@"Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
+   //dLog("Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
    NSSize Papiergroesse=[PrintInfo paperSize];
    int leftRand=(Papiergroesse.width-bounds.size.width)/2;
    int topRand=(Papiergroesse.height-bounds.size.height)/2;
@@ -894,7 +952,7 @@
    
    int platzV=(Papiergroesse.height-bounds.size.height);
    
-   //NSLog(@"platzH: %d  platzV %d",platzH,platzV);
+   //dLog("platzH: %d  platzV %d",platzH,platzV);
    
    int botRand=(Papiergroesse.height-topRand-bounds.size.height-1);
    
@@ -902,23 +960,23 @@
    [PrintInfo setRightMargin:leftRand];
    [PrintInfo setTopMargin:freiOben];
    [PrintInfo setBottomMargin:botRand];
-  /*
-   // Get the PMPrintSettings object from the printInfo.
-   PMPrintSettings settings = [PrintInfo PMPrintSettings];
-   
-   // Modify/Set the settings of interest.
-   // This code sets the number of copies requested to 10.
-   (void)PMSetCopies(settings, 2, false);
-   
-   // Turn on collation so that the copies are collated.
-   (void)PMSetCollate(settings, true);
-   
-   // Tell Cocoa that the print settings have been changed. This allows
-   // Cocoa to perform necessary housekeeping.
-   [PrintInfo updateFromPMPrintSettings];
-   
-   NSLog (@"BlattDruckenMitDicArray PrintInfo nach: %@",PrintInfo);
-*/
+   /*
+    // Get the PMPrintSettings object from the printInfo.
+    PMPrintSettings settings = [PrintInfo PMPrintSettings];
+    
+    // Modify/Set the settings of interest.
+    // This code sets the number of copies requested to 10.
+    (void)PMSetCopies(settings, 2, false);
+    
+    // Turn on collation so that the copies are collated.
+    (void)PMSetCollate(settings, true);
+    
+    // Tell Cocoa that the print settings have been changed. This allows
+    // Cocoa to perform necessary housekeeping.
+    [PrintInfo updateFromPMPrintSettings];
+    
+    DLog (@"BlattDruckenMitDicArray PrintInfo nach: %@",PrintInfo);
+    */
    
    int Papierbreite=(int)Papiergroesse.width;
    int Papierhoehe=(int)Papiergroesse.height;
@@ -926,8 +984,8 @@
    int linkerRand=(int)[PrintInfo leftMargin];
    int rechterRand=[PrintInfo rightMargin];
    
-   //NSLog(@"linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
- //  NSRect DruckFeld=NSMakeRect(linkerRand, obererRand, DruckbereichH, DruckbereichV);
+   //dLog("linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
+   //  NSRect DruckFeld=NSMakeRect(linkerRand, obererRand, DruckbereichH, DruckbereichV);
    
    //DruckView=[[NSView alloc]initWithFrame:DruckFeld];
    //[DruckView addSubview:Druckfeld];
@@ -943,12 +1001,12 @@
    DruckOperation=[NSPrintOperation printOperationWithView: Druckfeld
                                                  printInfo:PrintInfo];
    [DruckOperation setShowsPrintPanel:YES];
- //  [DruckOperation runOperation];
-
+   //  [DruckOperation runOperation];
+   
    [DruckOperation runOperationModalForWindow:[self window]
-                                    delegate:self didRunSelector:@selector(printOperationDidRun: success: contextInfo:)
-                                 contextInfo:nil];
-
+                                     delegate:self didRunSelector:@selector(printOperationDidRun: success: contextInfo:)
+                                  contextInfo:nil];
+   
    
 }
 

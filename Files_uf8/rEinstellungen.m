@@ -1,6 +1,13 @@
 #import "rEinstellungen.h"
 
-void rLog(char*string )
+void rLog(char*string )// release, immer zeigen
+{
+   {
+      printf("%s\n",string);
+   }
+   
+}
+void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
 {
    if (SHOWLOG)
    {
@@ -14,7 +21,7 @@ void rLog(char*string )
 - (id)initWithFrame:(NSRect)frame
 {
    if ((self = [super initWithFrame:frame]))
-   
+      
    {
       return self;
       
@@ -48,7 +55,7 @@ void rLog(char*string )
    {
       [self setImage:OFF];
    }
-
+   
 }
 
 - (BOOL)status
@@ -77,9 +84,9 @@ void rLog(char*string )
 
 -(void)setTag:(NSInteger)derTag
 {
-   //NSLog(@"setTag tag: %ld derTag: %ld",self.tag,derTag);
+   //DLog(@"setTag tag: %ld derTag: %ld",self.tag,derTag);
    tag = derTag;
-   //NSLog(@"setTag tag: %ld",tag);
+   //DLog(@"setTag tag: %ld",tag);
 }
 
 - (NSInteger)tag
@@ -89,10 +96,10 @@ void rLog(char*string )
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    [super mouseDown:theEvent];
-   //NSLog(@"Knopf mouseDown: %d",wert);
+   [super mouseDown:theEvent];
+   //DLog(@"Knopf mouseDown: %d",wert);
    
-  
+   
    NSImage *ON = [NSImage imageNamed:@"KnopfOFF"];
    NSImage *OFF = [NSImage imageNamed:@"KnopfON"];
    if (status)
@@ -107,13 +114,13 @@ void rLog(char*string )
    //return;
    
    //KeyNummer=[NSNumber numberWithInt:nr];
-   //NSLog(@"keyDown: %@",[theEvent characters]);
-   //NSLog(@"keyDown AdminListe  nr: %d  char: %@",nr,[theEvent characters]);
+   //DLog(@"keyDown: %@",[theEvent characters]);
+   //DLog(@"keyDown AdminListe  nr: %d  char: %@",nr,[theEvent characters]);
    NSMutableDictionary* tempTastenDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    [tempTastenDic setObject:[NSNumber numberWithInt:wert]forKey:@"wert"];
    [tempTastenDic setObject:[NSNumber numberWithInt:status]forKey:@"status"];
    [tempTastenDic setObject:[NSNumber numberWithInt:self.tag]forKey:@"tag"];
-
+   
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
    [nc postNotificationName:@"matrixtaste" object:tempTastenDic];
@@ -133,13 +140,13 @@ void rLog(char*string )
           selector:@selector(MatrixTasteAktion:)
               name:@"matrixtaste"
             object:nil];
-
+   
    [nc addObserver:self
           selector:@selector(EndPrintAktion:)
               name:@"endprint"
             object:nil];
    
-   rLog("hallo");
+   //rLog("hallo");
    NSRect r = Knopf.frame;
    float hoehe = r.size.height;
    float breite = r.size.width;
@@ -147,7 +154,7 @@ void rLog(char*string )
    int b=-1^a;
    int c=b+1;
    
-   //NSLog(@"a: %d b: %d c: %d",a,b,c);
+   //DLog(@"a: %d b: %d c: %d",a,b,c);
    
    
    [[self window]setAcceptsMouseMovedEvents:YES];
@@ -163,28 +170,28 @@ void rLog(char*string )
    BOOL istOrdner=NO;
    if ([Filemanager fileExistsAtPath:PListPfad isDirectory:&istOrdner]&& istOrdner)
    {
-      rLog("PList-Ordner da");
+      DLog(@"PList-Ordner da");
       if ([Filemanager fileExistsAtPath:[PListPfad stringByAppendingPathComponent:@"TabPList"]])
       {
-         //NSLog(@"PList da: %@",[PList description]);
          [PList setDictionary:[NSMutableDictionary dictionaryWithContentsOfFile:[PListPfad stringByAppendingPathComponent:@"TabPList"]]];
-         //NSLog(@"PList da: %@",[PList description]);
+         //DLog(@"PList da: %@",[PList description]);
       }
       
    }
    else
    {
-      NSLog(@"PList-Ordner nicht da");
+      ALog(@"PList-Ordner nicht da");
    }
    if ([PList objectForKey:@"lastmode"])
    {
-      //NSLog(@"mode: %d",[[PList objectForKey:@"lastmode"]intValue]);
+      //DLog(@"mode: %d",[[PList objectForKey:@"lastmode"]intValue]);
       [ModeSeg selectSegmentWithTag:[[PList objectForKey:@"lastmode"]intValue]];
       
    }
    if ([PList objectForKey:@"gruppendic"])
    {
-      NSLog(@"Gruppendic da: %@",[PList objectForKey:@"gruppendic"]);
+      // DLog(@"Gruppendic da: %@",[PList objectForKey:@"gruppendic"]);
+      //DLog(@"DLog Gruppendic da: %@",[PList objectForKey:@"gruppendic"]);
       
    }
    else
@@ -198,7 +205,7 @@ void rLog(char*string )
       [tempGruppenDic setObject:[NSNumber numberWithInt:1]forKey:@"F"];
       [PList setObject:tempGruppenDic forKey:@"gruppendic"];
    }
-   //NSLog(@"read PList: %@",[PList description]);
+   DLog(@"read PList: %@",[PList description]);
    if ([PList objectForKey:@"lastgruppe"])
    {
       if ([[PList objectForKey:@"gruppendic"]objectForKey:[PList objectForKey:@"lastgruppe"]])
@@ -255,8 +262,8 @@ void rLog(char*string )
    NSRect Tastenfeld=TastenmatrixRect;
    Tastenfeld.size.width=26;
    Tastenfeld.size.height=26;
-  // Tastenfeld.origin.y -= 5;
-   //NSLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+   // Tastenfeld.origin.y -= 5;
+   //DLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
    int i, k;
    int d=30;
    NSRect Wertfeld;
@@ -272,26 +279,26 @@ void rLog(char*string )
             Tastenfeld.origin.y+=5;
          
          /*
-         NSButton * Taste=[[NSButton alloc]initWithFrame:Tastenfeld];
-         NSButtonCell* Zelle=[[NSButtonCell alloc]init];
-         [Zelle setTitle:@""];
-         [Taste setTag:k+ 10*(9-i)];
-         [Zelle setBordered:YES];
+          NSButton * Taste=[[NSButton alloc]initWithFrame:Tastenfeld];
+          NSButtonCell* Zelle=[[NSButtonCell alloc]init];
+          [Zelle setTitle:@""];
+          [Taste setTag:k+ 10*(9-i)];
+          [Zelle setBordered:YES];
+          
+          [Zelle setButtonType:NSOnOffButton];
+          [Zelle setBezelStyle: NSCircularBezelStyle];
+          [Taste setCell:Zelle];
+          [Taste setAction:@selector(Tastenaktion:)];
+          [Taste sizeToFit];
+          [Taste display];
+          */
          
-         [Zelle setButtonType:NSOnOffButton];
-         [Zelle setBezelStyle: NSCircularBezelStyle];
-         [Taste setCell:Zelle];
-         [Taste setAction:@selector(Tastenaktion:)];
-         [Taste sizeToFit];
-         [Taste display];
-         */
- 
          
          
-       //  [Tastenarray addObject:Taste];
-       //  [Tastenmatrixfeld addSubview:Taste];
+         //  [Tastenarray addObject:Taste];
+         //  [Tastenmatrixfeld addSubview:Taste];
          NSImage *OFF = [NSImage imageNamed:@"KnopfOFF"];
-
+         
          rKnopf* tempknopf = [[rKnopf alloc]initWithFrame:Tastenfeld];
          NSUInteger t=k+ 10*(9-i);
          [tempknopf setTag:k+ 10*(9-i)];
@@ -299,11 +306,11 @@ void rLog(char*string )
          [Tastenarray addObject:tempknopf];
          [Tastenmatrixfeld addSubview:tempknopf];
          
-
+         
       }//for k
       Wertfeld=Tastenfeld;
       Wertfeld.origin.x+=1.8*d;
-  //    Wertfeld.origin.y+=5;
+      //    Wertfeld.origin.y+=5;
       Wertfeld.size.height-=4;
       Wertfeld.size.width*=1.3;
       
@@ -334,7 +341,7 @@ void rLog(char*string )
    //[ModeSeg selectSegmentWithTag:0];
    int erfolg=[self makeFirstResponder:NULL];
    NSURLRequest* Anfrage=[NSURLRequest requestWithURL:[NSURL URLWithString:@"www.duernten.ch"]];
-   //NSLog(@"Header: %@",[[Anfrage allHTTPHeaderFields]description]);
+   //DLog(@"Header: %@",[[Anfrage allHTTPHeaderFields]description]);
    
    //self.window.backgroundColor = NSColor.whiteColor;
    Anzahlfeld.toolTip = NSLocalizedString(@"Anzahlfeld", nil);
@@ -348,7 +355,7 @@ void rLog(char*string )
 
 - (IBAction)showArbeitsblatt:(id)sender
 {
-   //NSLog(@"showVorlage: ");
+   //DLog(@"showVorlage: ");
    
    if (!Arbeitsblattfenster)
 	  {
@@ -362,7 +369,7 @@ void rLog(char*string )
 
 - (IBAction)showVorlage:(id)sender
 {
-   NSLog(@"showVorlage: ");
+   DLog(@"showVorlage: ");
    
    if (!Vorlagefenster)
 	  {
@@ -376,14 +383,14 @@ void rLog(char*string )
 
 - (IBAction)showEinstellungen:(id)sender
 {
-   NSLog(@"showEinstellungen: ");
+   DLog(@"showEinstellungen: ");
    if (!SettingDrawer)
 	  {
         SettingDrawer=[[NSDrawer alloc]init];
         
      }
-  [SettingDrawer open];
-
+   [SettingDrawer open];
+   
 }
 
 
@@ -402,43 +409,43 @@ void rLog(char*string )
 
 - (void)EndPrintAktion:(NSNotification*)note
 {
-   NSLog(@"EndPrintAktion %@:",note);
+   //DLog(@"EndPrintAktion %@:",note);
    long gruppeindex = [Gruppefeld indexOfSelectedItem];
    NSString* titel =[Gruppefeld objectValueOfSelectedItem];
-   NSLog(@"SndCalccontroller: EndPrintAktion titel :%@ gruppeindex: %ld",titel,gruppeindex);
+   //DLog(@"SndCalccontroller: EndPrintAktion titel :%@ gruppeindex: %ld",titel,gruppeindex);
    NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
    int aktuelleNummer =[Nummerfeld intValue];
    
    [tempGruppenDic setObject:[NSNumber numberWithInt:aktuelleNummer+1]forKey:titel];
    [Nummerfeld setIntValue:aktuelleNummer+1];
-   NSLog(@"EndPrintAktion tempGruppenDic: %@",tempGruppenDic);
-   NSLog(@"EndPrintAktion PList: %@",PList);
-
+   //DLog(@"EndPrintAktion tempGruppenDic: %@",tempGruppenDic);
+   //DLog(@"EndPrintAktion PList: %@",PList);
+   
 }
 
 - (void) MatrixTasteAktion:(NSNotification*)note
 {
-   //NSLog(@"MatrixTastenAktion %@:",note.object);
+   //DLog(@"MatrixTastenAktion %@:",note.object);
    int tastentag =[[note.object objectForKey:@"tag"]intValue];
    int zeile=[[note.object objectForKey:@"tag"]intValue]/10;
    int kolonne=[[note.object objectForKey:@"tag"]intValue]%10 ;
    int status = [[note.object objectForKey:@"status"]intValue];
-  // NSLog(@"MatrixTasteAktion: %d, zeile: %d kolonne: %d status: %d",tastentag, zeile, kolonne,status);
+   // DLog(@"MatrixTasteAktion: %d, zeile: %d kolonne: %d status: %d",tastentag, zeile, kolonne,status);
    int zeilenwert=[[Wertarray objectAtIndex:9-zeile]intValue];
    int add;
    switch ([ModeSeg selectedSegment])
    {
       case 0://Hundertertabelle
-         //NSLog(@"Hundertertabelle");
+         //DLog(@"Hundertertabelle");
          add=10*(zeile)+(kolonne+1);
-         //NSLog(@"Hundertertabelle add: %d",add);
+         //DLog(@"Hundertertabelle add: %d",add);
          break;
          
       case 1://Reihentabelle
          add=(zeile+1)*(kolonne+1);
-
-         //NSLog(@"Reihentabelle add: %d",add);
-                  break;
+         
+         //DLog(@"Reihentabelle add: %d",add);
+         break;
          
    }//switch
    
@@ -474,7 +481,7 @@ void rLog(char*string )
    {
       int tempstatus =[(rKnopf*)[Tastenarray objectAtIndex:i]status];
       summe += tempstatus;
-  
+      
       
    }
    [Anzahlfeld setIntValue:summe];
@@ -489,26 +496,26 @@ void rLog(char*string )
       int erfolg=[self makeFirstResponder:NULL];
       [self  setDefaultButtonCell:NULL];
    }
-
+   
 }
 
 - (void)Tastenaktion:(id)sender
 {
-   //NSLog(@"Taste: %d",[sender tag]);
+   //DLog(@"Taste: %d",[sender tag]);
    int zeile=[sender tag]/10;
    int kolonne=[sender tag]%10 ;
-   //NSLog(@"Taste: %d, zeile: %d kolonne: %d state: %d",[sender tag], zeile, kolonne,[[sender cell]state]);
+   //DLog(@"Taste: %d, zeile: %d kolonne: %d state: %d",[sender tag], zeile, kolonne,[[sender cell]state]);
    int zeilenwert=[[Wertarray objectAtIndex:9-zeile]intValue];
    int add;
    switch ([ModeSeg selectedSegment])
    {
       case 0://Hundertertabelle
-         //NSLog(@"Hundertertabelle");
+         //DLog(@"Hundertertabelle");
          add=10*(zeile)+(kolonne+1);
          break;
          
       case 1://Reihentabelle
-         //NSLog(@"Reihentabelle");
+         //DLog(@"Reihentabelle");
          add=(zeile+1)*(kolonne+1);
          break;
          
@@ -624,79 +631,79 @@ void rLog(char*string )
    {
       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:titel]intValue]];
       /*
-      switch ([sender indexOfSelectedItem])
-      {
-         case 0:// A
-            if ([tempGruppenDic objectForKey:@"A"])
-            {
-               
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"A"]intValue]];
-            }
-           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"A"];
-            
-            break;
-            
-         case 1:// B
-            if ([tempGruppenDic objectForKey:@"B"])
-            {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"B"]intValue]];
-            }
-            //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"B"];
-            
-            break;
-            
-         case 2:// C
-            if ([tempGruppenDic objectForKey:@"C"])
-            {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"C"]intValue]];
-            }
-           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"C"];
-            
-            break;
-            
-         case 3:// D
-            if ([tempGruppenDic objectForKey:@"D"])
-            {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"D"]intValue]];
-            }
-           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"D"];
-            
-            break;
-            
-         case 4:// E
-            if ([tempGruppenDic objectForKey:@"E"])
-            {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"E"]intValue]];
-            }
-           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"E"];
-            
-            break;
-            
-         case 5:// F
-            if ([tempGruppenDic objectForKey:@"F"])
-            {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"F"]intValue]];
-            }
-            //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"F"];
-            
-            break;
-            
-            
-      }//switch index
-      */
-      NSLog(@"reportGruppe tempGruppenDic: %@",tempGruppenDic);
+       switch ([sender indexOfSelectedItem])
+       {
+       case 0:// A
+       if ([tempGruppenDic objectForKey:@"A"])
+       {
+       
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"A"]intValue]];
+       }
+       // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"A"];
+       
+       break;
+       
+       case 1:// B
+       if ([tempGruppenDic objectForKey:@"B"])
+       {
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"B"]intValue]];
+       }
+       //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"B"];
+       
+       break;
+       
+       case 2:// C
+       if ([tempGruppenDic objectForKey:@"C"])
+       {
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"C"]intValue]];
+       }
+       // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"C"];
+       
+       break;
+       
+       case 3:// D
+       if ([tempGruppenDic objectForKey:@"D"])
+       {
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"D"]intValue]];
+       }
+       // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"D"];
+       
+       break;
+       
+       case 4:// E
+       if ([tempGruppenDic objectForKey:@"E"])
+       {
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"E"]intValue]];
+       }
+       // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"E"];
+       
+       break;
+       
+       case 5:// F
+       if ([tempGruppenDic objectForKey:@"F"])
+       {
+       [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"F"]intValue]];
+       }
+       //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"F"];
+       
+       break;
+       
+       
+       }//switch index
+       */
+      DLog(@"reportGruppe tempGruppenDic: %@",tempGruppenDic);
    }//if tempGruppenDic
-  //  NSLog(@"PList: %@",PList);
+   //  DLog(@"PList: %@",PList);
 }
 
 - (IBAction)reportMoreCopies:(id)sender
 {
-   NSLog(@"reportMoreCopies: %ld",[sender state]);
+   //DLog(@"reportMoreCopies: %ld",[sender state]);
    NSMutableDictionary* moreCopiesDic = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithLong:[morecopies state]] forKey:@"morecopies"];
    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
-
-[nc postNotificationName:@"anzahlkopien" object:self userInfo:moreCopiesDic];
-
+   
+   [nc postNotificationName:@"anzahlkopien" object:self userInfo:moreCopiesDic];
+   
 }
 
 
@@ -710,7 +717,7 @@ void rLog(char*string )
      }
    [Arbeitsblattfenster showWindow:self];
    
- 
+   [Arbeitsblattfenster clearDouble];
    
    NSMutableDictionary* MatrixDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    NSMutableArray* stateArray=[[NSMutableArray alloc]initWithCapacity:0];
@@ -727,13 +734,13 @@ void rLog(char*string )
    [MatrixDic setObject:[ModeSeg labelForSegment:[ModeSeg selectedSegment]] forKey:@"Titel"];
    [MatrixDic setObject:[NSNumber numberWithInt:[Anzahlfeld intValue]] forKey:@"Anzahl"];
    [MatrixDic setObject:[NSNumber numberWithLong:[morecopies state]] forKey:@"morecopies"];
-
+   
    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
    [nc postNotificationName:@"Tastenwerte" object:self userInfo:MatrixDic];
    
    NSMutableDictionary* moreCopiesDic = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithLong:[morecopies state]] forKey:@"morecopies"];
    [nc postNotificationName:@"anzahlkopien" object:self userInfo:moreCopiesDic];
-
+   
    [[PList objectForKey:@"gruppendic"]setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:[Gruppefeld stringValue]];
 }
 
@@ -777,8 +784,8 @@ void rLog(char*string )
    {
       for (k=0;k<10;k++)//Kolonne
       {
-        // rKnopf* tempKnopf =(rKnopf*)[Tastenarray objectAtIndex:i+10*k];
-        // NSLog(@"tempKnopf: %@",tempKnopf);
+         // rKnopf* tempKnopf =(rKnopf*)[Tastenarray objectAtIndex:i+10*k];
+         // DLog(@"tempKnopf: %@",tempKnopf);
          [(rKnopf*)[Tastenarray objectAtIndex:i+10*k]clearStatus];
          
       }
@@ -797,7 +804,7 @@ void rLog(char*string )
 -(IBAction)terminate:(id)sender
 {
    BOOL OK=[self beenden];
-   //NSLog(@"terminate");
+   //DLog(@"terminate");
    if (OK)
    {
       [NSApp terminate:self];
@@ -810,7 +817,7 @@ void rLog(char*string )
 
 - (BOOL)beenden
 {
-   //NSLog(@"beenden last Gruppe: %@ last Nummer: %d",[Gruppefeld stringValue],[Nummerfeld intValue]);
+   //DLog(@"beenden last Gruppe: %@ last Nummer: %d",[Gruppefeld stringValue],[Nummerfeld intValue]);
    [[PList objectForKey:@"gruppendic"]setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:[Gruppefeld stringValue]];
    
    BOOL BeendenOK=YES;
@@ -819,40 +826,40 @@ void rLog(char*string )
                         stringByAppendingPathComponent:@"TabData"];
    
    
-   BOOL istOrdner=NO;	
+   BOOL istOrdner=NO;
    NSFileManager *Filemanager=[NSFileManager defaultManager];
    if ([Filemanager fileExistsAtPath:PListPfad isDirectory:&istOrdner]&& istOrdner)
    {
-      //NSLog(@"PList-Ordner da");
+      //DLog(@"PList-Ordner da");
       
    }
    else
    {
-      //NSLog(@"PList-Ordner nicht da");
+      //DLog(@"PList-Ordner nicht da");
       NSError* err;
       BOOL OK=[Filemanager createDirectoryAtPath:PListPfad withIntermediateDirectories:YES attributes:nil error:&err];
-     // BOOL OK=[Filemanager createDirectoryAtPath:PListPfad  attributes:NULL];
+      // BOOL OK=[Filemanager createDirectoryAtPath:PListPfad  attributes:NULL];
    }
    if (!PList) //noch keine PList
    {
-      //NSLog(@"beenden save PList: neue PList anlegen");
+      //DLog(@"beenden save PList: neue PList anlegen");
       PList=[[NSMutableDictionary alloc]initWithCapacity:0];
    }
 			NSArray* gruppearray = [Gruppefeld objectValues];
-   NSLog(@"beenden gruppearray: %@",[gruppearray description]);
+   DLog(@"beenden gruppearray: %@",[gruppearray description]);
    [[PList objectForKey:@"A"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"A"];
    [[PList objectForKey:@"B"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"B"];
    [[PList objectForKey:@"C"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"C"];
    [[PList objectForKey:@"D"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"D"];
    [[PList objectForKey:@"E"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"E"];
-  [[PList objectForKey:@"F"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"F"];
+   [[PList objectForKey:@"F"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"F"];
    
    
    [PList setObject: [NSDate date] forKey:@"lastdate"];
    [PList setObject: [NSNumber numberWithInt:[ModeSeg selectedSegment]] forKey:@"lastmode"];
    [PList setObject: [NSNumber numberWithInt:[Nummerfeld intValue]] forKey:@"lastnummer"];
    [PList setObject: [Gruppefeld stringValue] forKey:@"lastgruppe"];
-   NSLog(@"beenden save PList: %@",[PList description]);
+   DLog(@"beenden save PList: %@",[PList description]);
    PListPfad=[PListPfad stringByAppendingPathComponent:@"TabPList"];
    BOOL PListOK=[PList writeToFile:PListPfad atomically:YES];
    
@@ -864,7 +871,7 @@ void rLog(char*string )
 
 - (void)controlTextDidBeginEditing:(NSNotification *)aNotification
 {
-   NSLog(@"controlTextDidBeginEditing: %@",[[aNotification object]stringValue]);
+   DLog(@"controlTextDidBeginEditing: %@",[[aNotification object]stringValue]);
    
    
 }
@@ -874,23 +881,23 @@ void rLog(char*string )
 
 {
    
-   NSLog(@"SndCalccontroller: controlTextDidChange object: %@ %@",[aNotification object],[[aNotification object]stringValue]);
+   DLog(@"SndCalccontroller: controlTextDidChange object: %@ %@",[aNotification object],[[aNotification object]stringValue]);
    long gruppeindex = [Gruppefeld indexOfSelectedItem];
    NSString* titel =[Gruppefeld objectValueOfSelectedItem];
-   NSLog(@"SndCalccontroller: controlTextDidChange titel :%@ gruppeindex: %ld",titel,gruppeindex);
+   DLog(@"SndCalccontroller: controlTextDidChange titel :%@ gruppeindex: %ld",titel,gruppeindex);
    NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
-
+   
    [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:titel];
-   NSLog(@"controlTextDidChange tempGruppenDic: %@",tempGruppenDic);
-   NSLog(@"controlTextDidChange PList: %@",PList);
-
+   //DLog(@"controlTextDidChange tempGruppenDic: %@",tempGruppenDic);
+   //DLog(@"controlTextDidChange PList: %@",PList);
+   
 }
 
 
 - (BOOL)windowShouldClose:(id)sender
 {
    BOOL OK=[self beenden];
-   //NSLog(@"windowShouldClose");
+   //DLog(@"windowShouldClose");
    if (OK)
    {
       

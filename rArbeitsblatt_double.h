@@ -25,7 +25,7 @@
 	//NSMutableArray* Wertarray;
 	int mode;
 }
-- (void)setMatrix:(NSArray*)Tastenwerte;
+//- (void)setMatrix:(NSArray*)Tastenwerte;
 @end
 
 
@@ -49,6 +49,7 @@ IBOutlet	rAufgabeRahmen_double*			Aufgaberahmen;
 IBOutlet	rAufgabeRahmen_double*			Aufgaberahmen2;
 IBOutlet	NSTextField*			Titelfeld2;
 NSRect Grupperahmen, Datumrahmen, Namerahmen, Nummerrahmen;
+  
 }
 
 @end 
@@ -57,12 +58,15 @@ NSRect Grupperahmen, Datumrahmen, Namerahmen, Nummerrahmen;
 
 @interface rArbeitsblatt_double : NSWindowController
 {
-IBOutlet	rDruckfeld_double*				Druckfeld_double;
+   IBOutlet	rDruckfeld_double*				Druckfeld_double;
+   IBOutlet NSButton*         DruckKnopf;
+   IBOutlet NSButton*         moreCopyCheck;
 
-NSMutableArray* TastenwertArray;
-int mode;
+   NSMutableArray* TastenwertArray;
+   int mode;
+    NSDictionary* printDic;
 }
-- (void)setMatrix:(NSArray*)Tastenwerte;
+//- (void)setMatrix:(NSArray*)Tastenwerte;
 
 - (void)printSerie:(NSDictionary*)druckdaten;
 - (IBAction)printDocument:(id)sender;

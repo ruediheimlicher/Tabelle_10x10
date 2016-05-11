@@ -10,6 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "rArbeitsblatt_double.h"
 #import "defines.h"
+
 #ifndef tabalpha
 #define tabalpha 0.9
 #endif
@@ -52,7 +53,7 @@
    //NSMutableArray* Wertarray;
    int mode;
 }
-- (void)setMatrix:(NSArray*)Tastenwerte;
+//- (void)setMatrix:(NSArray*)Tastenwerte;
 @end
 
 
@@ -62,7 +63,7 @@
    NSMutableArray* Wertarray;
    int mode;
 }
-- (void)setMatrix:(NSArray*)Tastenwerte;
+//- (void)setMatrix:(NSArray*)Tastenwerte;
 @end
 
 
@@ -93,6 +94,8 @@
 
 @interface rArbeitsblatt : NSWindowController 
 {
+   IBOutlet NSButton*         DruckKnopf;
+   IBOutlet NSButton*         moreCopyCheck;
    IBOutlet	rDruckfeld*				Druckfeld;
    rEinstellungenFenster*			EinstellungenFenster;
    rEinstellungenSheet*				EinstellungenSheet;
@@ -103,4 +106,7 @@
 }
 - (IBAction)printDocument:(id)sender;
 - (void)BlattDruckenMitDicArray:(NSArray*)derProjektDicArray;
+- (IBAction)reportDrucken :(id)sender;
+- (IBAction)reportMoreCopies:(id)sender;
+- (void)clearDouble;
 @end

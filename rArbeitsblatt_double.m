@@ -6,6 +6,7 @@
 //
 
 #import "rArbeitsblatt_double.h"
+#import "defines.h"
 
 @implementation rRahmen_double
 - (id) initWithFrame:(NSRect)frame
@@ -17,7 +18,7 @@ self =[super initWithFrame:frame];
 
 - (void)drawRect:(NSRect)rect
 {
-//NSLog(@"rRahmen drawRect ");
+//dLog("rRahmen drawRect ");
 //NSBezierPath p=[Aufgaberahmen path];
 NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
 NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
@@ -26,7 +27,7 @@ NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:taba
 [[NSColor grayColor]set];
 [NSBezierPath strokeRect:r];
 
-//NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+//dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 
 }
 
@@ -38,7 +39,7 @@ NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:taba
 @implementation rAufgabeRahmen_double
 - (id)initWithFrame:(NSRect)frame
 {
-	//NSLog(@"rAufgabeRahmen init");
+	//dLog("rAufgabeRahmen init");
 	self=[super initWithFrame:frame];
    
    NSNotificationCenter * nc;
@@ -55,7 +56,7 @@ NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:taba
 	{
 	[TastenwertArray addObject:[NSNumber numberWithInt:0]];
 	}
-	//NSLog(@"rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
+	//dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
 		return self;
 
 /*
@@ -72,9 +73,9 @@ mode=1;
 {
    if ([[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"])
    {
-      //NSLog(@"TastenwerteAktion double: note: %@",[[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"]description]);
+      //dLog("TastenwerteAktion double: note: %@",[[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[[note userInfo]objectForKey:@"druckdatendic"]objectForKey:@"Tastenwerte"];
-      //NSLog(@"TastenwerteAktion: tempArray: %@",[tempArray description]);
+      //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
       [TastenwertArray setArray:tempArray];
       if ([[note userInfo]objectForKey:@"Mode"])
@@ -90,7 +91,7 @@ mode=1;
 
 - (void)drawRect:(NSRect)rect
 {
-	//NSLog(@"rRahmen drawRect ");
+	//dLog("rRahmen drawRect ");
 	//NSBezierPath p=[Aufgaberahmen path];
 	NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
 	[[NSColor grayColor]set];
@@ -99,7 +100,7 @@ mode=1;
 
 	//[NSBezierPath strokeRect:rr];
 	
-	//NSLog(@"rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+	//dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 	//Tastenwerte=[[[NSArray alloc]init]retain];
 	int offsetx=40;
 	int offsety=32;
@@ -110,7 +111,7 @@ mode=1;
 															  //Tastenfeld.origin.x=10;
 															  //Tastenfeld.origin.y=10;
 		
-	//NSLog(@"TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+	//dLog("TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
 	int i, k;
 	int d=26;
 	int kar=14;
@@ -144,12 +145,12 @@ mode=1;
 						case 0: // Hundertertabelle
 							zeilenwert+=(10*(9-i))+(k+1);
 							summe +=(10*(9-i))+(k+1);
-							//NSLog(@"Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+							//dLog("Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
 							break;
 						case 1: //Reihentabelle
 							zeilenwert+=((10-i))*(k+1);
 							summe += ((10-i))*(k+1);
-							//NSLog(@"Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+							//dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
 							break;
 							
 					}//switch mode
@@ -182,7 +183,7 @@ mode=1;
 			 [self addSubview:Taste];
 			 */
 		}//for k
-		 //NSLog(@"zeile: %d zeilenwert: %d",i, zeilenwert);
+		 //dLog("zeile: %d zeilenwert: %d",i, zeilenwert);
 		
 		Wertfeld=Tastenfeld;
 		Wertfeld.origin.x+=2*d;
@@ -317,7 +318,7 @@ mode=1;
 	
 	NSRect r;
 	r=[Titelrahmen frame];
-	//NSLog(@"Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+	//dLog("Druckfeld awake Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 	//[self addSubview:Aufgaberahmen];
 	//[Titelfeld setStringValue:@"Reihentabelle"];
 	//[ErgebnisTitelfeld setStringValue:@"Reihentabelle"];
@@ -326,14 +327,14 @@ mode=1;
 	//[self addSubview:Gruppefeld];
 	Grupperahmen=[Gruppefeld frame];
 	r=Grupperahmen;
-	//NSLog(@"Druckfeld awake drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+	//dLog("Druckfeld awake drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 	
 }
 
 
 - (void)drawRect:(NSRect)rect
 {
-//NSLog(@"Arbeitsblatt Druckfeld drawRect ");
+//dLog("Arbeitsblatt Druckfeld drawRect ");
 //NSBezierPath p=[Aufgaberahmen path];
 NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
 [FeldFarbe set];
@@ -344,14 +345,14 @@ NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:taba
 NSRect r=[Gruppefeld bounds];
 r.size.width -=2;
 [NSBezierPath strokeRect:r];
-//NSLog(@"Druckfeld drawRect Grupperahmen: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+//dLog("Druckfeld drawRect Grupperahmen: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
 
 }
 
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   //NSLog(@"AB Druckfeld_double TastenwerteAktion note: %@",[[note userInfo]description]);
+   //dLog("AB Druckfeld_double TastenwerteAktion note: %@",[[note userInfo]description]);
    if ([[[note userInfo]objectForKey:@"druckdatendic"] objectForKey:@"Anzahl"] && [[[[note userInfo]objectForKey:@"druckdatendic"] objectForKey:@"Anzahl"]intValue])
    {
       
@@ -395,7 +396,7 @@ r.size.width -=2;
 - (id)init
 {
     self=[super initWithWindowNibName:@"Arbeitsblatt_double"];
-	NSLog(@"rArbeitsblatt_double ");
+	//dLog("rArbeitsblatt_double ");
 	
     
         // Add your subclass-specific initialization here.
@@ -406,28 +407,33 @@ r.size.width -=2;
 
 - (void)awakeFromNib
 {
-//NSLog(@"Arbeitsblatt awake");
+//dLog("Arbeitsblatt awake");
 
 
 
 }
 
+- (IBAction)reportDrucken :(id)sender
+{
+   int AnzahlKopien = [moreCopyCheck state];
+   DruckKnopf.hidden = YES;
+   [self BlattDruckenMitDic:NULL];
+}
 
 
 
 - (void)printSerie:(NSDictionary*)druckdaten
 {
-   NSLog(@"Arbeitsblatt_double printSerie druckdaten: %@",druckdaten);
-   NSDictionary* printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
+   DLog(@"Arbeitsblatt_double printSerie druckdaten: %@",druckdaten);
+   printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
    [self BlattDruckenMitDic:printDic];
-   
 }
 
 - (IBAction)printDocument:(id)sender
 {
-NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
+//dLog("ArbeitsblattArbeitsblatt_double printDocument");
 [self BlattDruckenMitDic:NULL];
-
+DruckKnopf.hidden = NO;
 }
 
 
@@ -435,7 +441,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 - (void)BlattDruckenMitDic:(NSDictionary*)derPrintDic
 {
 	int AnzahlKopien=1;
-	//NSLog (@"Arbeitsblatt_double Serie: BlattDruckenMitDic PrintDic: %@",[derPrintDic description]);
+	//DLog (@"Arbeitsblatt_double Serie: BlattDruckenMitDic PrintDic: %@",[derPrintDic description]);
 
 	if ([[derPrintDic objectForKey:@"druckdaten"] objectForKey:@"Anzahl"])
       
@@ -443,7 +449,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
       AnzahlKopien = [[[derPrintDic objectForKey:@"druckdaten"] objectForKey:@"Anzahl"]intValue];
 	}
 	//NSTextView* DruckView=[[[NSTextView alloc]init]autorelease];
-	//NSLog (@"Arbeitsblatt double Serie: BlattDruckenMitDic: %@",[derPrintDic description]);
+	//DLog (@"Arbeitsblatt double Serie: BlattDruckenMitDic: %@",[derPrintDic description]);
 	NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
 	
 	[PrintInfo setOrientation:NSPortraitOrientation];
@@ -455,7 +461,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 	NSRect bounds=[PrintInfo imageablePageBounds];
 	
 	int x=bounds.origin.x;int y=bounds.origin.y;int h=bounds.size.height;int w=bounds.size.width;
-	//NSLog(@"Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
+	//dLog("Bounds 1 x: %d y: %d  h: %d  w: %d",x,y,h,w);
 	NSSize Papiergroesse=[PrintInfo paperSize];
 	int leftRand=(Papiergroesse.width-bounds.size.width)/2;
 	int topRand=(Papiergroesse.height-bounds.size.height)/2;
@@ -470,7 +476,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 
 	int platzV=(Papiergroesse.height-bounds.size.height);
 	
-	//NSLog(@"platzH: %d  platzV %d",platzH,platzV);
+	//dLog("platzH: %d  platzV %d",platzH,platzV);
 
 	int botRand=(Papiergroesse.height-topRand-bounds.size.height-1);
 	
@@ -486,7 +492,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 	int linkerRand=(int)[PrintInfo leftMargin];
 	int rechterRand=[PrintInfo rightMargin];
 	
-	//NSLog(@"linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
+	//dLog("linkerRand: %d  rechterRand: %d  Breite: %d Hoehe: %d",linkerRand,rechterRand, DruckbereichH,DruckbereichV);
 	//NSRect DruckFeld=NSMakeRect(linkerRand, obererRand, DruckbereichH, DruckbereichV);
 	
 	//DruckView=[[NSView alloc]initWithFrame:DruckFeld];
