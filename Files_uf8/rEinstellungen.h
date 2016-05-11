@@ -20,7 +20,7 @@
 - (void)clearStatus;
 @end
 
-@interface Einstellungen : NSPanel <NSCollectionViewDataSource>
+@interface Einstellungen : NSPanel <NSCollectionViewDataSource,NSTextFieldDelegate>
 {
    IBOutlet id Tasten;
    
@@ -47,10 +47,12 @@
    
    IBOutlet NSImageView*         Knopf;
 
+   IBOutlet NSDrawer*         SettingDrawer;
    
-   rVorlage*		Vorlagefenster;
-   rArbeitsblatt*	Arbeitsblattfenster;
-   NSMutableDictionary* PList;
+   rVorlage*                  Vorlagefenster;
+   rArbeitsblatt*             Arbeitsblattfenster;
+   NSMutableDictionary*       PList;
+   
 }
 @property NSWindow* window;
 
@@ -59,7 +61,7 @@
 - (IBAction)showVorlage:(id)sender;
 - (IBAction)clearTasten:(id)sender;
 - (IBAction)reportMoreCopies:(id)sender;
-
+- (IBAction)showEinstellungen:(id)sender;
 - (void)reCalc;
 - (IBAction)newTabelle:(id)sender;
 - (BOOL)beenden;

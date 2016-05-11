@@ -22,7 +22,11 @@
                             <menuItem isSeparatorItem="YES" id="202">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Einstellungen…" keyEquivalent="," id="129"/>
+                            <menuItem title="Einstellungen…" keyEquivalent="," id="129">
+                                <connections>
+                                    <action selector="showEinstellungen:" target="213" id="8nK-Dm-451"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -64,6 +68,10 @@
                         <items>
                             <menuItem title="Neue Tabelle" keyEquivalent="n" id="N2X-vl-v3D"/>
                             <menuItem isSeparatorItem="YES" id="SAx-7U-h3b"/>
+                            <menuItem title="Gruppen..." id="TRz-3h-YWf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="4JF-4w-rvw"/>
                             <menuItem title="Print…" keyEquivalent="p" id="78">
                                 <connections>
                                     <action selector="printDocument:" target="-1" id="200"/>
@@ -251,6 +259,17 @@
                             <action selector="reportMoreCopies:" target="213" id="KeD-aT-NqO"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" id="CmF-NM-Nqh">
+                        <rect key="frame" x="196" y="10" width="139" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="&gt; " bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="4An-IQ-JPT">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="showEinstellungen:" target="213" id="ouW-Vd-wWH"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
@@ -267,5 +286,29 @@
                 <outlet property="morecopies" destination="1pH-Dn-QqL" id="bph-Gn-Tff"/>
             </connections>
         </window>
+        <drawer trailingOffset="15" id="ysD-Rg-ZQq">
+            <size key="contentSize" width="100" height="100"/>
+            <size key="maxContentSize" width="10000" height="10000"/>
+            <connections>
+                <outlet property="contentView" destination="8AG-VI-ocl" id="v5o-9s-J3h"/>
+                <outlet property="delegate" destination="213" id="sBa-oh-Xw6"/>
+                <outlet property="parentWindow" destination="213" id="dFA-qv-bfZ"/>
+            </connections>
+        </drawer>
+        <customView id="8AG-VI-ocl" userLabel="Drawer Content View">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="293"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="ERm-pQ-KFw">
+                    <rect key="frame" x="5" y="104" width="81" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MF4-YX-LLi">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="494" y="626.5"/>
+        </customView>
     </objects>
 </document>

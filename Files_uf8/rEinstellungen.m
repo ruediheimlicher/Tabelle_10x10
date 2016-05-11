@@ -145,6 +145,7 @@
                          stringByAppendingPathComponent:@"Documents"]
                         stringByAppendingPathComponent:@"TabData"];
    
+   [Nummerfeld setDelegate:self];
    BOOL istOrdner=NO;
    if ([Filemanager fileExistsAtPath:PListPfad isDirectory:&istOrdner]&& istOrdner)
    {
@@ -169,7 +170,7 @@
    }
    if ([PList objectForKey:@"gruppendic"])
    {
-      
+      NSLog(@"Gruppendic da: %@",[PList objectForKey:@"gruppendic"]);
       
    }
    else
@@ -357,6 +358,20 @@
    [Vorlagefenster showWindow:self];
    
 }
+
+
+- (IBAction)showEinstellungen:(id)sender
+{
+   NSLog(@"showEinstellungen: ");
+   if (!SettingDrawer)
+	  {
+        SettingDrawer=[[NSDrawer alloc]init];
+        
+     }
+  [SettingDrawer open];
+
+}
+
 
 - (IBAction)setMode:(id)sender
 {
@@ -571,16 +586,19 @@
 
 - (IBAction)reportGruppe:(id)sender
 {
-   NSLog(@"reportGruppe: %@ index: %d",[sender stringValue],[sender indexOfSelectedItem]);
+   
+   NSLog(@"reportGruppe: %@ index: %ld",[sender stringValue],(long)[sender indexOfSelectedItem]);
    int nummer=1;
    NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
    if (tempGruppenDic)
    {
+      
       switch ([sender indexOfSelectedItem])
       {
          case 0:// A
             if ([tempGruppenDic objectForKey:@"A"])
             {
+               
                [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"A"]intValue]+1];
             }
             [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"A"];
@@ -634,8 +652,10 @@
             
             
       }//switch index
+      
+      NSLog(@"tempGruppenDic: %@",tempGruppenDic);
    }//if tempGruppenDic
-   
+    NSLog(@"PList: %@",PList);
 }
 
 - (IBAction)reportMoreCopies:(id)sender
@@ -778,28 +798,53 @@
    else
    {
       //NSLog(@"PList-Ordner nicht da");
-      
-      BOOL OK=[Filemanager createDirectoryAtPath:PListPfad  attributes:NULL];
+      NSError* err;
+      BOOL OK=[Filemanager createDirectoryAtPath:PListPfad withIntermediateDirectories:YES attributes:nil error:&err];
+     // BOOL OK=[Filemanager createDirectoryAtPath:PListPfad  attributes:NULL];
    }
    if (!PList) //noch keine PList
    {
       //NSLog(@"save PList: neue PList anlegen");
       PList=[[NSMutableDictionary alloc]initWithCapacity:0];
    }
-			
+			NSArray* gruppearray = [Gruppefeld objectValues];
+   NSLog(@"gruppearray: %@",[gruppearray description]);
+   [[PList objectForKey:@"A"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"A"];
+   [[PList objectForKey:@"B"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"B"];
+   [[PList objectForKey:@"C"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"C"];
+   [[PList objectForKey:@"D"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"D"];
+   [[PList objectForKey:@"E"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"E"];
+  [[PList objectForKey:@"F"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"F"];
    
    
    [PList setObject: [NSDate date] forKey:@"lastdate"];
    [PList setObject: [NSNumber numberWithInt:[ModeSeg selectedSegment]] forKey:@"lastmode"];
    [PList setObject: [NSNumber numberWithInt:[Nummerfeld intValue]] forKey:@"lastnummer"];
    [PList setObject: [Gruppefeld stringValue] forKey:@"lastgruppe"];
-   //NSLog(@"save PList: %@",[PList description]);
+   NSLog(@"save PList: %@",[PList description]);
    PListPfad=[PListPfad stringByAppendingPathComponent:@"TabPList"];
    BOOL PListOK=[PList writeToFile:PListPfad atomically:YES];
    
    
    
    return BeendenOK;
+}
+
+
+- (void)controlTextDidBeginEditing:(NSNotification *)aNotification
+{
+   NSLog(@"controlTextDidBeginEditing: %@",[[aNotification object]stringValue]);
+   
+   
+}
+
+
+- (void)controlTextDidChange:(NSNotification *)aNotification
+
+{
+   
+   NSLog(@"SndCalccontroller: controlTextDidChange: %@",[[aNotification object]stringValue]);
+   
 }
 
 

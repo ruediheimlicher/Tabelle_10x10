@@ -11,8 +11,7 @@
 "Gruppefeld" = "Buchstaben A-F für eine Klassierung nach Schwierigkeitsgrad";
 
 /* No comment provided by engineer. */
-"Nummerfeld" = "Fortlaufende Nummer des Arbeitsblattes für die eingestellte Gruppe.
-Die Nummer wird gespeichert und bei jedem neuen Arbeitsblatt erhöht.";
+"Nummerfeld" = "Fortlaufende Nummer des Arbeitsblattes für die eingestellte Gruppe. Die Nummer wird gespeichert und bei jedem neuen Arbeitsblatt erhöht.";
 
 /* Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll */
 "Tastenmatrixfeld" = "Anklicken der gewünschten Positionen, für die eine Rechnung generiert werden soll.";
