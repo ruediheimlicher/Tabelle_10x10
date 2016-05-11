@@ -1,5 +1,13 @@
 #import "rEinstellungen.h"
 
+void rLog(char*string )
+{
+   if (SHOWLOG)
+   {
+      printf("%s\n",string);
+   }
+   
+}
 
 @implementation rKnopf
 
@@ -126,7 +134,12 @@
               name:@"matrixtaste"
             object:nil];
 
+   [nc addObserver:self
+          selector:@selector(EndPrintAktion:)
+              name:@"endprint"
+            object:nil];
    
+   rLog("hallo");
    NSRect r = Knopf.frame;
    float hoehe = r.size.height;
    float breite = r.size.width;
@@ -135,6 +148,7 @@
    int c=b+1;
    
    //NSLog(@"a: %d b: %d c: %d",a,b,c);
+   
    
    [[self window]setAcceptsMouseMovedEvents:YES];
    
@@ -149,7 +163,7 @@
    BOOL istOrdner=NO;
    if ([Filemanager fileExistsAtPath:PListPfad isDirectory:&istOrdner]&& istOrdner)
    {
-      //NSLog(@"PList-Ordner da");
+      rLog("PList-Ordner da");
       if ([Filemanager fileExistsAtPath:[PListPfad stringByAppendingPathComponent:@"TabPList"]])
       {
          //NSLog(@"PList da: %@",[PList description]);
@@ -189,7 +203,7 @@
    {
       if ([[PList objectForKey:@"gruppendic"]objectForKey:[PList objectForKey:@"lastgruppe"]])
       {
-         [Nummerfeld setIntValue:[[[PList objectForKey:@"gruppendic"]objectForKey:[PList objectForKey:@"lastgruppe"]]intValue]+1];
+         [Nummerfeld setIntValue:[[[PList objectForKey:@"gruppendic"]objectForKey:[PList objectForKey:@"lastgruppe"]]intValue]];
          [Gruppefeld selectItemWithObjectValue:[PList objectForKey:@"lastgruppe"]];
       }
    }
@@ -384,6 +398,22 @@
 {
    
    
+}
+
+- (void)EndPrintAktion:(NSNotification*)note
+{
+   NSLog(@"EndPrintAktion %@:",note);
+   long gruppeindex = [Gruppefeld indexOfSelectedItem];
+   NSString* titel =[Gruppefeld objectValueOfSelectedItem];
+   NSLog(@"SndCalccontroller: EndPrintAktion titel :%@ gruppeindex: %ld",titel,gruppeindex);
+   NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
+   int aktuelleNummer =[Nummerfeld intValue];
+   
+   [tempGruppenDic setObject:[NSNumber numberWithInt:aktuelleNummer+1]forKey:titel];
+   [Nummerfeld setIntValue:aktuelleNummer+1];
+   NSLog(@"EndPrintAktion tempGruppenDic: %@",tempGruppenDic);
+   NSLog(@"EndPrintAktion PList: %@",PList);
+
 }
 
 - (void) MatrixTasteAktion:(NSNotification*)note
@@ -586,76 +616,77 @@
 
 - (IBAction)reportGruppe:(id)sender
 {
-   
-   NSLog(@"reportGruppe: %@ index: %ld",[sender stringValue],(long)[sender indexOfSelectedItem]);
+   NSString* titel =[Gruppefeld objectValueOfSelectedItem];
+   DLog(@"reportGruppe: %@ index: %ld titel: %@",[sender stringValue],(long)[sender indexOfSelectedItem],titel );
    int nummer=1;
    NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
    if (tempGruppenDic)
    {
-      
+      [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:titel]intValue]];
+      /*
       switch ([sender indexOfSelectedItem])
       {
          case 0:// A
             if ([tempGruppenDic objectForKey:@"A"])
             {
                
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"A"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"A"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"A"];
+           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"A"];
             
             break;
             
          case 1:// B
             if ([tempGruppenDic objectForKey:@"B"])
             {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"B"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"B"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"B"];
+            //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"B"];
             
             break;
             
          case 2:// C
             if ([tempGruppenDic objectForKey:@"C"])
             {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"C"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"C"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"C"];
+           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"C"];
             
             break;
             
          case 3:// D
             if ([tempGruppenDic objectForKey:@"D"])
             {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"D"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"D"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"D"];
+           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"D"];
             
             break;
             
          case 4:// E
             if ([tempGruppenDic objectForKey:@"E"])
             {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"E"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"E"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"E"];
+           // [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"E"];
             
             break;
             
          case 5:// F
             if ([tempGruppenDic objectForKey:@"F"])
             {
-               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"F"]intValue]+1];
+               [Nummerfeld setIntValue:[[tempGruppenDic objectForKey:@"F"]intValue]];
             }
-            [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"F"];
+            //[tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:@"F"];
             
             break;
             
             
       }//switch index
-      
-      NSLog(@"tempGruppenDic: %@",tempGruppenDic);
+      */
+      NSLog(@"reportGruppe tempGruppenDic: %@",tempGruppenDic);
    }//if tempGruppenDic
-    NSLog(@"PList: %@",PList);
+  //  NSLog(@"PList: %@",PList);
 }
 
 - (IBAction)reportMoreCopies:(id)sender
@@ -779,7 +810,7 @@
 
 - (BOOL)beenden
 {
-   //NSLog(@"last Gruppe: %@ last Nummer: %d",[Gruppefeld stringValue],[Nummerfeld intValue]);
+   //NSLog(@"beenden last Gruppe: %@ last Nummer: %d",[Gruppefeld stringValue],[Nummerfeld intValue]);
    [[PList objectForKey:@"gruppendic"]setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:[Gruppefeld stringValue]];
    
    BOOL BeendenOK=YES;
@@ -804,11 +835,11 @@
    }
    if (!PList) //noch keine PList
    {
-      //NSLog(@"save PList: neue PList anlegen");
+      //NSLog(@"beenden save PList: neue PList anlegen");
       PList=[[NSMutableDictionary alloc]initWithCapacity:0];
    }
 			NSArray* gruppearray = [Gruppefeld objectValues];
-   NSLog(@"gruppearray: %@",[gruppearray description]);
+   NSLog(@"beenden gruppearray: %@",[gruppearray description]);
    [[PList objectForKey:@"A"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"A"];
    [[PList objectForKey:@"B"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"B"];
    [[PList objectForKey:@"C"]setObject:[Gruppefeld itemObjectValueAtIndex:0]  forKey:@"C"];
@@ -821,7 +852,7 @@
    [PList setObject: [NSNumber numberWithInt:[ModeSeg selectedSegment]] forKey:@"lastmode"];
    [PList setObject: [NSNumber numberWithInt:[Nummerfeld intValue]] forKey:@"lastnummer"];
    [PList setObject: [Gruppefeld stringValue] forKey:@"lastgruppe"];
-   NSLog(@"save PList: %@",[PList description]);
+   NSLog(@"beenden save PList: %@",[PList description]);
    PListPfad=[PListPfad stringByAppendingPathComponent:@"TabPList"];
    BOOL PListOK=[PList writeToFile:PListPfad atomically:YES];
    
@@ -843,8 +874,16 @@
 
 {
    
-   NSLog(@"SndCalccontroller: controlTextDidChange: %@",[[aNotification object]stringValue]);
-   
+   NSLog(@"SndCalccontroller: controlTextDidChange object: %@ %@",[aNotification object],[[aNotification object]stringValue]);
+   long gruppeindex = [Gruppefeld indexOfSelectedItem];
+   NSString* titel =[Gruppefeld objectValueOfSelectedItem];
+   NSLog(@"SndCalccontroller: controlTextDidChange titel :%@ gruppeindex: %ld",titel,gruppeindex);
+   NSMutableDictionary* tempGruppenDic=(NSMutableDictionary*)[PList objectForKey:@"gruppendic"];
+
+   [tempGruppenDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:titel];
+   NSLog(@"controlTextDidChange tempGruppenDic: %@",tempGruppenDic);
+   NSLog(@"controlTextDidChange PList: %@",PList);
+
 }
 
 

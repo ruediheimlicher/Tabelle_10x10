@@ -9,7 +9,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "rArbeitsblatt_double.h"
-
+#import "defines.h"
 #ifndef tabalpha
 #define tabalpha 0.9
 #endif
@@ -91,7 +91,7 @@
 
 
 
-@interface rArbeitsblatt : NSWindowController
+@interface rArbeitsblatt : NSWindowController 
 {
    IBOutlet	rDruckfeld*				Druckfeld;
    rEinstellungenFenster*			EinstellungenFenster;

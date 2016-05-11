@@ -706,9 +706,12 @@
 
 - (void) AnzahlKopienAktion:(NSNotification*)note
 {
-   //NSLog(@"AnzahlKopienAktion: note: %@",[note userInfo]);
+   NSLog(@"AnzahlKopienAktion: note: %@",[note userInfo]);
    AnzahlKopien = [[[note userInfo]objectForKey:@"morecopies"]intValue];
    return;
+   
+   
+   
    if (!Arbeitsblattfenster_double)
 	  {
        // Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
@@ -741,7 +744,7 @@
 - (IBAction)printDocument:(id)sender
 {
    // Arbeitsblatt mit lsg drucken. Anschliessend Dialog aufrufen, um anz Kopien abzufragen und diese zu drucken
-   NSLog(@"printDocument");
+   NSLog(@"printDocument AnzahlKopien: %d",AnzahlKopien);
    [self BlattDruckenMitDicArray:NULL];
    //EinstellungenSheet =[[rEinstellungenFenster alloc]init];
    
@@ -756,7 +759,10 @@
     
     */
    //
-   if (AnzahlKopien)
+   return;
+   
+   // verschoben in printOperationDidRun
+  if (AnzahlKopien)
    {
 
    if (!Arbeitsblattfenster_double)
@@ -765,7 +771,8 @@
         
      }
    [Arbeitsblattfenster_double showWindow:self];
-/*
+
+    /*
    EinstellungenFenster =[[rEinstellungenFenster alloc]init];
    NSModalSession EinstellungenSession=[NSApp beginModalSessionForWindow:[EinstellungenFenster window]];
    [EinstellungenFenster setAnzahlKopien:AnzahlKopien];
@@ -806,11 +813,53 @@
    
    //NSLog(@"Druckdaten aus Druckfeld: %@",[Druckfeld druckdatenDic]);
    [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
-   }
+  
+     
+     }
    
    
 }
 
+
+
+- (void)printOperationDidRun:(NSPrintOperation *)printOperation  success:(BOOL)success  contextInfo:(void *)contextInfo
+{
+   DLog(@"printOperationDidRun ");
+   NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
+
+   NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+   [NotificationDic setObject:[NSNumber numberWithInt:1] forKey:@"printok"];
+
+   // Notific an Einstellungen schicken
+   [nc postNotificationName:@"endprint" object:self userInfo:NotificationDic];
+   
+ 
+   // doble drucken
+   
+   if (AnzahlKopien)
+   {
+      NSLog(@"printOperationDidRun druckdatenDic: %@",[Druckfeld druckdatenDic]);
+
+      if (!Arbeitsblattfenster_double)
+      {
+         Arbeitsblattfenster_double=[[rArbeitsblatt_double alloc]init];
+         
+      }
+      [Arbeitsblattfenster_double showWindow:self];
+      
+      NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
+      [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
+      [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
+      
+      NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+      
+      // Tastenwerte an Arbeitsblatt_double schicken
+      [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
+
+      [Arbeitsblattfenster_double printSerie:[Druckfeld druckdatenDic]];
+   }
+   
+}
 
 
 - (void)BlattDruckenMitDicArray:(NSArray*)derProjektDicArray
@@ -893,8 +942,13 @@
    NSPrintOperation* DruckOperation;
    DruckOperation=[NSPrintOperation printOperationWithView: Druckfeld
                                                  printInfo:PrintInfo];
-   [DruckOperation setShowPanels:YES];
-   [DruckOperation runOperation];
+   [DruckOperation setShowsPrintPanel:YES];
+ //  [DruckOperation runOperation];
+
+   [DruckOperation runOperationModalForWindow:[self window]
+                                    delegate:self didRunSelector:@selector(printOperationDidRun: success: contextInfo:)
+                                 contextInfo:nil];
+
    
 }
 

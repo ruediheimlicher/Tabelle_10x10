@@ -1,7 +1,7 @@
 /* rVorlage */
 
 #import <Cocoa/Cocoa.h>
-
+#import "defines.h"
 
 
 @interface rVorlagerahmen: NSView

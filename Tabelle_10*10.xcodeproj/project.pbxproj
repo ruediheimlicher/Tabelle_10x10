@@ -79,6 +79,7 @@
 		BDD5EA911CDBAE1D001DB2F4 /* KnopfON.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = KnopfON.gif; sourceTree = "<group>"; };
 		BDD5EA931CDBB7B1001DB2F4 /* KnopfOFF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = KnopfOFF.gif; sourceTree = "<group>"; };
 		BDD5EA961CDD1739001DB2F4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Einstellungen.strings; sourceTree = "<group>"; };
+		BDE588271CE32FF6002A0FA2 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +138,7 @@
 		29B97314FDCFA39411CA2CEA /* Tabelle_10*10 */ = {
 			isa = PBXGroup;
 			children = (
+				BDE588271CE32FF6002A0FA2 /* defines.h */,
 				BDD5EA931CDBB7B1001DB2F4 /* KnopfOFF.gif */,
 				BDD5EA911CDBAE1D001DB2F4 /* KnopfON.gif */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -397,6 +399,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "3rd Party Mac Developer Application";
 				ENABLE_TESTABILITY = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -411,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;

@@ -417,10 +417,10 @@ r.size.width -=2;
 
 - (void)printSerie:(NSDictionary*)druckdaten
 {
-   //NSLog(@"Arbeitsblatt_double printSerie");
-NSDictionary* printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
-[self BlattDruckenMitDic:printDic];
-
+   NSLog(@"Arbeitsblatt_double printSerie druckdaten: %@",druckdaten);
+   NSDictionary* printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
+   [self BlattDruckenMitDic:printDic];
+   
 }
 
 - (IBAction)printDocument:(id)sender
@@ -435,7 +435,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 - (void)BlattDruckenMitDic:(NSDictionary*)derPrintDic
 {
 	int AnzahlKopien=1;
-	NSLog (@"Arbeitsblatt_double Serie: BlattDruckenMitDic PrintDic: %@",[derPrintDic description]);
+	//NSLog (@"Arbeitsblatt_double Serie: BlattDruckenMitDic PrintDic: %@",[derPrintDic description]);
 
 	if ([[derPrintDic objectForKey:@"druckdaten"] objectForKey:@"Anzahl"])
       
@@ -443,7 +443,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
       AnzahlKopien = [[[derPrintDic objectForKey:@"druckdaten"] objectForKey:@"Anzahl"]intValue];
 	}
 	//NSTextView* DruckView=[[[NSTextView alloc]init]autorelease];
-	//NSLog (@"Arbeitsblatt Serie: BlattDruckenMitDic ProjektDicArray: %@",[derPrintDic description]);
+	//NSLog (@"Arbeitsblatt double Serie: BlattDruckenMitDic: %@",[derPrintDic description]);
 	NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
 	
 	[PrintInfo setOrientation:NSPortraitOrientation];
@@ -502,7 +502,7 @@ NSLog(@"ArbeitsblattArbeitsblatt_double printDocument");
 	NSPrintOperation* DruckOperation;
 	DruckOperation=[NSPrintOperation printOperationWithView: Druckfeld_double
 												  printInfo:PrintInfo];
-	[DruckOperation setShowPanels:YES];
+   [DruckOperation setShowsPrintPanel:YES];
 	//[DruckOperation setShowPanels:NO];
 	
 	[DruckOperation runOperation];

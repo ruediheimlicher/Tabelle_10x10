@@ -8,6 +8,8 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "defines.h"
+
 #define tabalpha 0.9
 
 @interface rRahmen_double: NSView

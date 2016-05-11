@@ -5,6 +5,8 @@
 #import "rVorlage.h"
 #import "rArbeitsblatt.h"
 #import "rArbeitsblatt_double.h"
+#import "defines.h"
+#include <stdio.h>
 
 @interface rKnopf:NSImageView
 {
