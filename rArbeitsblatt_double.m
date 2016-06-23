@@ -416,6 +416,7 @@ r.size.width -=2;
 - (IBAction)reportDrucken :(id)sender
 {
    int AnzahlKopien = [moreCopyCheck state];
+   //Knopfrahmen.hidden = YES;
    DruckKnopf.hidden = YES;
    [self BlattDruckenMitDic:NULL];
 }
@@ -433,6 +434,7 @@ r.size.width -=2;
 {
 //dLog("ArbeitsblattArbeitsblatt_double printDocument");
 [self BlattDruckenMitDic:NULL];
+//Knopfrahmen.hidden = NO;
 DruckKnopf.hidden = NO;
 }
 

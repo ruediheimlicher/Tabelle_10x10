@@ -236,6 +236,7 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    CGColorSpaceRef colorSpace = [[rahmenfarbe colorSpace] CGColorSpace];
    [rahmenfarbe getComponents:(CGFloat *)&components];
    CGColorRef rahmenCGfarbe = CGColorCreate(colorSpace, components);
+  
    int rot=236;
    int gruen=236;
    int blau=225;

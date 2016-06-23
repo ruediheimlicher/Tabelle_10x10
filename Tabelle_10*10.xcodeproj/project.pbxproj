@@ -80,6 +80,7 @@
 		BDD5EA931CDBB7B1001DB2F4 /* KnopfOFF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = KnopfOFF.gif; sourceTree = "<group>"; };
 		BDD5EA961CDD1739001DB2F4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Einstellungen.strings; sourceTree = "<group>"; };
 		BDE588271CE32FF6002A0FA2 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		BDE588291CE3D630002A0FA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Arbeitsblatt.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +321,7 @@
 			children = (
 				BD0417131CD65A0900F1288A /* Base */,
 				BD04171B1CD65AE100F1288A /* de */,
+				BDE588291CE3D630002A0FA2 /* en */,
 			);
 			name = Arbeitsblatt.nib;
 			sourceTree = "<group>";

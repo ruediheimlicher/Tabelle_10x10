@@ -1,0 +1,30 @@
+
+/* Class = "NSWindow"; title = "Arbeitsblatt"; ObjectID = "5"; */
+"5.title" = "Arbeitsblatt";
+
+/* Class = "NSTextFieldCell"; title = "Gruppe :"; ObjectID = "106"; */
+"106.title" = "Gruppe :";
+
+/* Class = "NSTextFieldCell"; title = "Nummer :"; ObjectID = "107"; */
+"107.title" = "Nummer :";
+
+/* Class = "NSTextFieldCell"; title = "Datum :"; ObjectID = "108"; */
+"108.title" = "Datum :";
+
+/* Class = "NSTextFieldCell"; title = "R"; ObjectID = "109"; */
+"109.title" = "R";
+
+/* Class = "NSTextFieldCell"; title = "Name :"; ObjectID = "110"; */
+"110.title" = "Name :";
+
+/* Class = "NSTextFieldCell"; title = "Nummer :"; ObjectID = "113"; */
+"113.title" = "Nummer :";
+
+/* Class = "NSTextFieldCell"; title = "Gruppe :"; ObjectID = "114"; */
+"114.title" = "Gruppe :";
+
+/* Class = "NSTextFieldCell"; title = "R"; ObjectID = "115"; */
+"115.title" = "R";
+
+/* Class = "NSTextFieldCell"; title = "Datum :"; ObjectID = "118"; */
+"118.title" = "Datum :";

@@ -46,6 +46,13 @@
 
 @end
 
+@interface rKnopfRahmen:rRahmen
+{
+   
+}
+
+@end
+
 
 @interface rAufgabeRahmen: rRahmen
 {
@@ -67,6 +74,7 @@
 @end
 
 
+
 @interface rDruckfeld: NSView
 {
    IBOutlet	NSTextField*			Gruppefeld;
@@ -75,6 +83,7 @@
    IBOutlet	NSTextField*			Nummerfeld;
    IBOutlet	NSTextField*			Titelfeld;
    IBOutlet	rRahmen*             Titelrahmen;
+ 
    IBOutlet	rAufgabeRahmen*		Aufgaberahmen;
    IBOutlet	NSTextField*         Ergebnisfeld;
    IBOutlet	NSTextField*			ErgebnisGruppefeld;
@@ -100,6 +109,7 @@
    rEinstellungenFenster*			EinstellungenFenster;
    rEinstellungenSheet*				EinstellungenSheet;
    rArbeitsblatt_double*			Arbeitsblattfenster_double;
+     IBOutlet	rKnopfRahmen*             Knopfrahmen;
    int									AnzahlKopien;
    
    NSString*            heuteDatumString;

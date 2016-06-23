@@ -79,6 +79,50 @@
 @end
 
 
+@implementation rKnopfRahmen
+- (id) initWithFrame:(NSRect)frame
+{
+   
+   self =[super initWithFrame:frame];
+   self.wantsLayer = YES;
+   return self;
+}
+
+- (void)drawRect:(NSRect)rect
+{
+   [super drawRect:rect];
+   //NSLog(@"rKnopfRahmen drawRect ");
+   //NSBezierPath p=[Aufgaberahmen path];
+   NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
+   NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.6 green:1.0 blue:0.7 alpha:tabalpha];
+   //FeldFarbe = [NSColor greenColor];
+   [FeldFarbe set];
+   [NSBezierPath fillRect:r];
+   //[[NSColor grayColor]set];
+   [NSBezierPath strokeRect:r];
+   
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+}
+
+
+- (void)awakeFromNib
+{
+   // ohne wirkung
+   float r = 250.0 / 255.0f;
+   float g = 255.0  / 255.0f;
+   float b = 100.0 / 255.0f;
+   
+   if(self.layer)
+   {
+      //NSLog(@"rKnopfRahmen  layer");
+      //CGColorRef color = CGColorCreateGenericRGB(r, g, b, 1.0f);
+      //self.layer.borderColor = color;
+      //CGColorRelease(color);
+   }
+}
+@end
+
+
 @implementation rAufgabeRahmen
 - (id)initWithFrame:(NSRect)frame
 {
@@ -701,7 +745,43 @@
               name:@"anzahlkopien"
             object:nil];
    
+   int rot=0;
+   int gruen=236;
+   int blau=0;
+   NSColor *rahmenfarbe = [NSColor colorWithCalibratedRed:rot/255.0
+                                                         green:gruen/255.0
+                                                          blue:blau/255.0
+                                                         alpha:1.0];
+   rahmenfarbe = [NSColor yellowColor];
+   // Convert to CGColorRef
+   NSInteger numberOfComponents = [rahmenfarbe numberOfComponents];
+   CGFloat components[numberOfComponents];
+   CGColorSpaceRef colorSpace = [[rahmenfarbe colorSpace] CGColorSpace];
+   [rahmenfarbe getComponents:(CGFloat *)&components];
+   CGColorRef rahmenGCfarbe = CGColorCreate(colorSpace, components);
+
+   int hgrot=236;
+   int hggruen=236;
+   int hgblau=250;
+   NSColor *hintergrundfarbe = [NSColor colorWithCalibratedRed:hgrot/255.0
+                                                         green:hggruen/255.0
+                                                          blue:hgblau/255.0
+                                                         alpha:1.0];
    
+   hintergrundfarbe = [NSColor greenColor];
+   // Convert to CGColorRef
+   NSInteger hgnumberOfComponents = [hintergrundfarbe numberOfComponents];
+   CGFloat hgcomponents[hgnumberOfComponents];
+   CGColorSpaceRef hgcolorSpace = [[hintergrundfarbe colorSpace] CGColorSpace];
+   [hintergrundfarbe getComponents:(CGFloat *)&hgcomponents];
+   CGColorRef hintergrundGCfarbe = CGColorCreate(hgcolorSpace, hgcomponents);
+
+   
+   //[Knopfrahmen setWantsLayer:YES];
+  // Knopfrahmen.layer.borderWidth=2.0;
+  
+   //[Knopfrahmen.layer setBackgroundColor:[[NSColor yellowColor] CGColor]];
+  // Knopfrahmen.layer.borderColor = [rahmenfarbe CGColor];
    
 }
 - (void)clearDouble
@@ -715,6 +795,7 @@
 - (IBAction)reportDrucken :(id)sender
 {
    AnzahlKopien = [moreCopyCheck state];
+   Knopfrahmen.hidden = YES;
    DruckKnopf.hidden = YES;
    moreCopyCheck.hidden = YES;
    [self BlattDruckenMitDicArray:NULL];
@@ -794,6 +875,7 @@
 {
    // Arbeitsblatt mit lsg drucken. Anschliessend Dialog aufrufen, um anz Kopien abzufragen und diese zu drucken
    // dLog("printDocument AnzahlKopien: %d",AnzahlKopien);
+   Knopfrahmen.hidden = YES;
    DruckKnopf.hidden = YES;
    moreCopyCheck.hidden = YES;
 
@@ -914,6 +996,7 @@
       }
  
    }
+   Knopfrahmen.hidden = NO;
    DruckKnopf.hidden = NO;
    moreCopyCheck.hidden = NO;
 
@@ -1002,7 +1085,6 @@
                                                  printInfo:PrintInfo];
    [DruckOperation setShowsPrintPanel:YES];
    //  [DruckOperation runOperation];
-   
    [DruckOperation runOperationModalForWindow:[self window]
                                      delegate:self didRunSelector:@selector(printOperationDidRun: success: contextInfo:)
                                   contextInfo:nil];
@@ -1011,7 +1093,12 @@
 }
 
 
-
+- (BOOL)windowShouldClose:(id)sender
+{
+   NSLog(@"windowShouldClose" );
+   [[Arbeitsblattfenster_double window ]orderOut:nil];
+   return YES;
+}
 
 
 @end

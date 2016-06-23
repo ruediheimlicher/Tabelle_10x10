@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="DruckKnopf" destination="GbV-0Q-yOh" id="f3X-du-43D"/>
                 <outlet property="Druckfeld" destination="7" id="8"/>
+                <outlet property="Knopfrahmen" destination="uBc-vo-oOR" id="sZS-R5-62m"/>
                 <outlet property="moreCopyCheck" destination="HqJ-lp-Jhf" id="hHM-EV-rvP"/>
                 <outlet property="window" destination="5" id="9"/>
             </connections>
@@ -85,7 +86,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" id="63">
-                                                    <rect key="frame" x="280" y="30" width="81" height="22"/>
+                                                    <rect key="frame" x="280" y="33" width="81" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="right" id="112">
                                                         <font key="font" metaFont="system"/>
@@ -111,28 +112,34 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <button id="HqJ-lp-Jhf">
-                                                    <rect key="frame" x="58" y="6" width="120" height="18"/>
+                                                <customView id="uBc-vo-oOR" customClass="rKnopfRahmen">
+                                                    <rect key="frame" x="51" y="3" width="303" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="check" title="Weitere Kopien" bezelStyle="regularSquare" imagePosition="right" inset="2" id="XQC-De-PWI">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="reportMoreCopies:" target="-2" id="OKv-61-pi5"/>
-                                                    </connections>
-                                                </button>
-                                                <button verticalHuggingPriority="750" id="GbV-0Q-yOh">
-                                                    <rect key="frame" x="184" y="2" width="150" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="roundTextured" title="Drucken" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zBk-6Y-Thq">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system" size="16"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="reportDrucken:" target="-2" id="6iM-8B-PXe"/>
-                                                    </connections>
-                                                </button>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" id="GbV-0Q-yOh">
+                                                            <rect key="frame" x="133" y="2" width="162" height="25"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <buttonCell key="cell" type="roundTextured" title="Drucken" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zBk-6Y-Thq">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system" size="14"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="reportDrucken:" target="-2" id="6iM-8B-PXe"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button id="HqJ-lp-Jhf">
+                                                            <rect key="frame" x="7" y="6" width="120" height="19"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <buttonCell key="cell" type="check" title="Weitere Kopien" bezelStyle="regularSquare" imagePosition="right" inset="2" id="XQC-De-PWI">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="reportMoreCopies:" target="-2" id="OKv-61-pi5"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </customView>
                                             </subviews>
                                         </customView>
                                         <customView id="51" customClass="rRahmen">
@@ -188,7 +195,7 @@
                                                     <rect key="frame" x="103" y="7" width="258" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="104">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="system" size="14"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -254,6 +261,9 @@
                     </scrollView>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="fhj-aq-1Rj"/>
+            </connections>
             <point key="canvasLocation" x="-232.5" y="211.5"/>
         </window>
         <customView id="35" userLabel="rDruckfeld" customClass="rDruckfeld">

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Files_uf8/rArbeitsblatt.m"
-            timestampString = "484659394.153732"
+            timestampString = "484729074.285721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "630"
-            endingLineNumber = "630"
+            startingLineNumber = "674"
+            endingLineNumber = "674"
             landmarkName = "-TastenwerteAktion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "rArbeitsblatt_double.m"
-            timestampString = "483992927.300708"
+            timestampString = "484693436.9812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Files_uf8/rEinstellungen.m"
-            timestampString = "484658740.371586"
+            timestampString = "484725371.626946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "789"
-            endingLineNumber = "789"
+            startingLineNumber = "790"
+            endingLineNumber = "790"
             landmarkName = "-clearTasten:"
             landmarkType = "5">
          </BreakpointContent>
