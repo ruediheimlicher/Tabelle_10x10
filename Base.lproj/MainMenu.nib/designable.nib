@@ -1,98 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
-            <items>
-                <menuItem title="Tabelle_10*10" id="56">
-                    <menu key="submenu" title="Tabelle_10*10" systemMenu="apple" id="57">
-                        <items>
-                            <menuItem title="Über Tabelle_10*10" id="58">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="202">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Einstellungen…" keyEquivalent="," id="129">
-                                <connections>
-                                    <action selector="showEinstellungen:" target="213" id="8nK-Dm-451"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="143">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Services" id="131">
-                                <menu key="submenu" title="Services" systemMenu="services" id="130"/>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="144">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Hide Tabelle_10*10" keyEquivalent="h" id="134">
-                                <connections>
-                                    <action selector="hide:" target="-2" id="152"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Hide Others" keyEquivalent="h" id="145">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="hideOtherApplications:" target="-2" id="146"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show All" id="150">
-                                <connections>
-                                    <action selector="unhideAllApplications:" target="-2" id="153"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="149">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Tabelle_10*10 beenden" keyEquivalent="q" id="136">
-                                <connections>
-                                    <action selector="terminate:" target="213" id="371"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="File" id="83">
-                    <menu key="submenu" title="File" id="81">
-                        <items>
-                            <menuItem title="Neue Tabelle" keyEquivalent="n" id="N2X-vl-v3D"/>
-                            <menuItem isSeparatorItem="YES" id="SAx-7U-h3b"/>
-                            <menuItem title="Gruppen..." id="TRz-3h-YWf">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="4JF-4w-rvw"/>
-                            <menuItem title="Print…" keyEquivalent="p" id="78">
-                                <connections>
-                                    <action selector="printDocument:" target="-1" id="200"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="Help" id="103">
-                    <menu key="submenu" title="Help" id="106">
-                        <items>
-                            <menuItem title="Taabelle 10*10 Help" keyEquivalent="?" id="111">
-                                <connections>
-                                    <action selector="showHelp:" target="-1" id="122"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-            </items>
-        </menu>
+        <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu"/>
         <window title="Einstellungen" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="213" userLabel="Panel" customClass="Einstellungen">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -149,8 +66,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="388"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" id="375">
-                        <rect key="frame" x="130" y="483" width="173" height="57"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="375">
+                        <rect key="frame" x="131" y="496" width="173" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Tabelle" id="389">
                             <font key="font" metaFont="system" size="36"/>
@@ -270,10 +187,29 @@
                             <action selector="showEinstellungen:" target="213" id="ouW-Vd-wWH"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="E3V-yh-7NY">
+                        <rect key="frame" x="140" y="473" width="64" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Datum :" id="oiu-Du-zcg">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="VmG-uG-syo">
+                        <rect key="frame" x="205" y="468" width="101" height="20"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" id="eVH-7v-Dx1">
+                            <font key="font" metaFont="system" size="12"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
                 <outlet property="Anzahlfeld" destination="367" id="369"/>
+                <outlet property="Datumfeld" destination="VmG-uG-syo" id="Gn6-FX-hbL"/>
                 <outlet property="Ergebnisfeld" destination="335" id="342"/>
                 <outlet property="Gruppefeld" destination="360" id="364"/>
                 <outlet property="Iconfeld" destination="373" id="374"/>
@@ -285,6 +221,7 @@
                 <outlet property="menu" destination="29" id="eS0-Vz-QPT"/>
                 <outlet property="morecopies" destination="1pH-Dn-QqL" id="bph-Gn-Tff"/>
             </connections>
+            <point key="canvasLocation" x="130.5" y="540.5"/>
         </window>
         <drawer trailingOffset="15" id="ysD-Rg-ZQq">
             <size key="contentSize" width="100" height="100"/>
@@ -310,5 +247,86 @@
             </subviews>
             <point key="canvasLocation" x="494" y="626.5"/>
         </customView>
+        <menuItem title="Tabelle_10*10" id="56">
+            <menu key="submenu" title="Tabelle_10*10" systemMenu="apple" id="57">
+                <items>
+                    <menuItem title="Über Tabelle_10*10" id="58">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <connections>
+                            <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="202">
+                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                    </menuItem>
+                    <menuItem title="Einstellungen…" keyEquivalent="," id="129">
+                        <connections>
+                            <action selector="showEinstellungen:" target="213" id="8nK-Dm-451"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="143">
+                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                    </menuItem>
+                    <menuItem title="Services" id="131">
+                        <menu key="submenu" title="Services" systemMenu="services" id="130"/>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="144">
+                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                    </menuItem>
+                    <menuItem title="Hide Tabelle_10*10" keyEquivalent="h" id="134">
+                        <connections>
+                            <action selector="hide:" target="-2" id="152"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem title="Hide Others" keyEquivalent="h" id="145">
+                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                        <connections>
+                            <action selector="hideOtherApplications:" target="-2" id="146"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem title="Show All" id="150">
+                        <connections>
+                            <action selector="unhideAllApplications:" target="-2" id="153"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="149">
+                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                    </menuItem>
+                    <menuItem title="Tabelle_10*10 beenden" keyEquivalent="q" id="136">
+                        <connections>
+                            <action selector="terminate:" target="213" id="371"/>
+                        </connections>
+                    </menuItem>
+                </items>
+            </menu>
+        </menuItem>
+        <menuItem title="File" id="83">
+            <menu key="submenu" title="File" id="81">
+                <items>
+                    <menuItem title="Neue Tabelle" keyEquivalent="n" id="N2X-vl-v3D"/>
+                    <menuItem isSeparatorItem="YES" id="SAx-7U-h3b"/>
+                    <menuItem title="Gruppen..." id="TRz-3h-YWf">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="4JF-4w-rvw"/>
+                    <menuItem title="Print…" keyEquivalent="p" id="78">
+                        <connections>
+                            <action selector="printDocument:" target="-1" id="200"/>
+                        </connections>
+                    </menuItem>
+                </items>
+            </menu>
+        </menuItem>
+        <menuItem title="Help" id="103">
+            <menu key="submenu" title="Help" id="106">
+                <items>
+                    <menuItem title="Taabelle 10*10 Help" keyEquivalent="?" id="111">
+                        <connections>
+                            <action selector="showHelp:" target="-1" id="122"/>
+                        </connections>
+                    </menuItem>
+                </items>
+            </menu>
+        </menuItem>
     </objects>
 </document>

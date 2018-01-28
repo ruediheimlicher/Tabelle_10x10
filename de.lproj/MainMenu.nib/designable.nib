@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="localizable">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <deployment version="101202" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -328,8 +329,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="388"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" id="375">
-                        <rect key="frame" x="130" y="490" width="173" height="47"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="375">
+                        <rect key="frame" x="130" y="500" width="131" height="47"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Tabelle" id="389">
                             <font key="font" metaFont="system" size="36"/>
@@ -359,8 +360,8 @@
                             <action selector="goArbeitsblatt:" target="213" id="357"/>
                         </connections>
                     </button>
-                    <comboBox verticalHuggingPriority="750" id="360">
-                        <rect key="frame" x="387" y="511" width="47" height="26"/>
+                    <comboBox verticalHuggingPriority="750" misplaced="YES" id="360">
+                        <rect key="frame" x="387" y="517" width="47" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="A" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="382">
                             <font key="font" metaFont="system"/>
@@ -379,8 +380,8 @@
                             <action selector="reportGruppe:" target="213" id="366"/>
                         </connections>
                     </comboBox>
-                    <textField verticalHuggingPriority="750" id="361">
-                        <rect key="frame" x="318" y="515" width="62" height="17"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="361">
+                        <rect key="frame" x="318" y="521" width="62" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Gruppe:" id="383">
                             <font key="font" metaFont="system"/>
@@ -388,8 +389,8 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="362">
-                        <rect key="frame" x="387" y="485" width="44" height="22"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="362">
+                        <rect key="frame" x="387" y="491" width="44" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="384">
                             <font key="font" metaFont="system"/>
@@ -397,8 +398,8 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="363">
-                        <rect key="frame" x="307" y="490" width="74" height="17"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="363">
+                        <rect key="frame" x="307" y="496" width="74" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Nummer:" id="385">
                             <font key="font" metaFont="system"/>
@@ -437,11 +438,30 @@
                             <action selector="reportMoreCopies:" target="213" id="xXZ-gx-2UN"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="KUT-g1-a2D">
+                        <rect key="frame" x="316" y="20" width="52" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Datum :" id="Tqb-KF-nIz">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="hYe-vz-haU">
+                        <rect key="frame" x="372" y="18" width="61" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="right" id="Pyf-Qg-wex">
+                            <font key="font" metaFont="system" size="11"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
                 <outlet property="Anzahlfeld" destination="367" id="369"/>
                 <outlet property="ClearTaste" destination="ZGh-4c-GzD" id="mXx-Xu-Mf7"/>
+                <outlet property="Datumfeld" destination="hYe-vz-haU" id="KQZ-Tc-0DC"/>
                 <outlet property="Ergebnisfeld" destination="335" id="342"/>
                 <outlet property="Gruppefeld" destination="360" id="364"/>
                 <outlet property="Iconfeld" destination="373" id="374"/>
@@ -453,6 +473,7 @@
                 <outlet property="goVorlageTaste" destination="355" id="358"/>
                 <outlet property="morecopies" destination="nsw-aR-Whm" id="pKz-7T-wtv"/>
             </connections>
+            <point key="canvasLocation" x="132.5" y="372.5"/>
         </window>
     </objects>
 </document>

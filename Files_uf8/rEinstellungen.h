@@ -22,7 +22,7 @@
 - (void)clearStatus;
 @end
 
-@interface Einstellungen : NSPanel <NSCollectionViewDataSource,NSTextFieldDelegate>
+@interface Einstellungen : NSPanel <NSTextFieldDelegate>
 {
    IBOutlet id Tasten;
    
@@ -35,7 +35,7 @@
    NSMutableArray*            Tastenarray;
    NSMutableArray*            Wertarray;
    NSString*                  heuteDatumString;
-   
+   IBOutlet   NSTextField*         Datumfeld;
    IBOutlet NSTextField*      Anzahlfeld;
    IBOutlet NSImageCell*      Iconfeld;
    IBOutlet NSButton*         goArbeitsblattTaste;

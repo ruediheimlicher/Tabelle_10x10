@@ -324,7 +324,7 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
       [Wert setTag:i];
       [Wert setStringValue:@""];
       [Wert setFont:[NSFont fontWithName:@"Helvetica" size: 14]];
-      [Wert setAlignment:NSRightTextAlignment];
+      [Wert setAlignment:NSTextAlignmentRight];
       Wert.toolTip = NSLocalizedString(@"Wertfeld",nil);
       [Wertarray addObject:Wert];
       [Tastenmatrixfeld addSubview:Wert];
@@ -337,7 +337,11 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    Ergebnisfeld.toolTip = NSLocalizedString(@"Ergebnisfeld", nil);
    //[Tastenmatrixfeld addSubview:Tastenmatrix];
    
-   [Ergebnisfeld setAlignment:NSRightTextAlignment];
+   [Ergebnisfeld setAlignment:NSTextAlignmentRight];
+   
+   NSString* heuteDatumString = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];//  12.09.2015 
+   [Datumfeld setStringValue:heuteDatumString];
+
    
    //[ModeSeg selectSegmentWithTag:0];
    int erfolg=[self makeFirstResponder:NULL];
@@ -907,5 +911,145 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    }
    return OK;
 }
+/*
+- (nonnull NSCollectionViewItem *)collectionView:(nonnull NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(nonnull NSIndexPath *)indexPath { 
+   <#code#>
+}
 
+- (NSInteger)collectionView:(nonnull NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section { 
+   <#code#>
+}
+
+- (nullable id)animationForKey:(nonnull NSAnimatablePropertyKey)key { 
+   <#code#>
+}
+
+- (nonnull instancetype)animator { 
+   <#code#>
+}
+
++ (nullable id)defaultAnimationForKey:(nonnull NSAnimatablePropertyKey)key { 
+   <#code#>
+}
+
+- (BOOL)validateUserInterfaceItem:(nonnull id<NSValidatedUserInterfaceItem>)item { 
+   <#code#>
+}
+
+- (NSRect)accessibilityFrame { 
+   <#code#>
+}
+
+- (nullable id)accessibilityParent { 
+   <#code#>
+}
+
+- (nullable NSAttributedString *)accessibilityAttributedStringForRange:(NSRange)range { 
+   <#code#>
+}
+
+- (nullable id)accessibilityCellForColumn:(NSInteger)column row:(NSInteger)row { 
+   <#code#>
+}
+
+- (NSRect)accessibilityFrameForRange:(NSRange)range { 
+   <#code#>
+}
+
+- (NSPoint)accessibilityLayoutPointForScreenPoint:(NSPoint)point { 
+   <#code#>
+}
+
+- (NSSize)accessibilityLayoutSizeForScreenSize:(NSSize)size { 
+   <#code#>
+}
+
+- (NSInteger)accessibilityLineForIndex:(NSInteger)index { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformCancel { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformConfirm { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformDecrement { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformDelete { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformIncrement { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformPick { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformPress { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformRaise { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformShowAlternateUI { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformShowDefaultUI { 
+   <#code#>
+}
+
+- (BOOL)accessibilityPerformShowMenu { 
+   <#code#>
+}
+
+- (nullable NSData *)accessibilityRTFForRange:(NSRange)range { 
+   <#code#>
+}
+
+- (NSRange)accessibilityRangeForIndex:(NSInteger)index { 
+   <#code#>
+}
+
+- (NSRange)accessibilityRangeForLine:(NSInteger)line { 
+   <#code#>
+}
+
+- (NSRange)accessibilityRangeForPosition:(NSPoint)point { 
+   <#code#>
+}
+
+- (NSPoint)accessibilityScreenPointForLayoutPoint:(NSPoint)point { 
+   <#code#>
+}
+
+- (NSSize)accessibilityScreenSizeForLayoutSize:(NSSize)size { 
+   <#code#>
+}
+
+- (nullable NSString *)accessibilityStringForRange:(NSRange)range { 
+   <#code#>
+}
+
+- (NSRange)accessibilityStyleRangeForIndex:(NSInteger)index { 
+   <#code#>
+}
+
+- (BOOL)isAccessibilitySelectorAllowed:(nonnull SEL)selector { 
+   <#code#>
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)aCoder { 
+   <#code#>
+}
+*/
 @end

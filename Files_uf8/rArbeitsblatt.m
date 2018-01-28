@@ -539,7 +539,7 @@
       [Zeilenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 12]];
       
       [self addSubview:Zeilenwertfeld];
-      [Zeilenwertfeld setAlignment:NSRightTextAlignment];
+      [Zeilenwertfeld setAlignment:NSTextAlignmentRight];
       
       if (zeilenwert)
       {
@@ -564,7 +564,7 @@
    [Summenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 14]];
    
    [self addSubview:Summenwertfeld];
-   [Summenwertfeld setAlignment:NSRightTextAlignment];
+   [Summenwertfeld setAlignment:NSTextAlignmentRight];
    if (summe)
    {
       [Summenwertfeld setIntValue:summe];
