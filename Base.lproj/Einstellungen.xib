@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1050" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,16 +19,16 @@
         <window title="Einstellungen" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="1" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" documentModal="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="251" y="291" width="405" height="277"/>
+            <rect key="contentRect" x="251" y="291" width="427" height="292"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
-            <value key="minSize" type="size" width="305" height="109"/>
-            <value key="maxSize" type="size" width="305" height="109"/>
-            <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="405" height="277"/>
+            <value key="minSize" type="size" width="427" height="109"/>
+            <value key="maxSize" type="size" width="430" height="300"/>
+            <view key="contentView" misplaced="YES" id="2">
+                <rect key="frame" x="0.0" y="0.0" width="427" height="292"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                 <subviews>
-                    <box boxType="custom" borderType="line" title="Box" id="DL3-an-L3N">
-                        <rect key="frame" x="-5" y="0.0" width="385" height="277"/>
+                    <box misplaced="YES" boxType="custom" borderType="line" title="Box" id="DL3-an-L3N">
+                        <rect key="frame" x="13" y="15" width="385" height="277"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="b4h-Ax-Lk3">
                             <rect key="frame" x="1" y="1" width="383" height="275"/>
@@ -85,7 +85,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="241.5" y="333.5"/>
+            <point key="canvasLocation" x="237.5" y="341"/>
         </window>
     </objects>
     <resources>
