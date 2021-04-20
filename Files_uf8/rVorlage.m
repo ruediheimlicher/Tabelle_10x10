@@ -44,7 +44,7 @@
       //dLog("Vorlage TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
       //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
-      
+       
       [TastenwertArray setArray:tempArray];
       
       [self setNeedsDisplay:YES];
@@ -186,7 +186,7 @@
 
 - (void)awakeFromNib
 {
-   heuteDatumString = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];//  12.09.2015
+   heuteDatumString = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];//  12.09.2015
    
    //[heute setCalendarFormat:@"%d.%m.%Y    Zeit: %H:%M"];
    [Datumfeld setStringValue:heuteDatumString];
@@ -207,10 +207,16 @@
    {
       if ([[note userInfo]objectForKey:@"Gruppe"])
       {
+         [Gruppefeld setBordered:YES];
          [Gruppefeld setStringValue:[[note userInfo]objectForKey:@"Gruppe"]];
+      }
+      else
+      {
+         
       }
       if ([[note userInfo]objectForKey:@"Nummer"])
       {
+         [Nummerfeld setBordered:YES];
          [Nummerfeld setStringValue:[[note userInfo]objectForKey:@"Nummer"]];
       }
       
@@ -220,7 +226,7 @@
          
       }
       
-      [Datumfeld setStringValue:heuteDatumString];
+     // [Datumfeld setStringValue:heuteDatumString];
       
    }//if Anzahl
    else
@@ -230,6 +236,7 @@
       [Gruppefeld setStringValue:@""];
       [Nummerfeld setStringValue:@""];
    }
+   [Datumfeld setStringValue:heuteDatumString];
    int erfolg=[[self window]makeFirstResponder:[self window]];
 }
 
@@ -268,7 +275,7 @@
    //DLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
    NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
    
-   [PrintInfo setOrientation:NSPortraitOrientation];
+   [PrintInfo setOrientation:NSPaperOrientationPortrait];
    [PrintInfo setHorizontalPagination: NSAutoPagination];
    [PrintInfo setVerticalPagination: NSAutoPagination];
    

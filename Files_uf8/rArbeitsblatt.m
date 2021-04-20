@@ -62,7 +62,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //dLog("rRahmen drawRect ");
+   //DLog(@"rRahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
@@ -91,7 +91,7 @@
 - (void)drawRect:(NSRect)rect
 {
    [super drawRect:rect];
-   //NSLog(@"rKnopfRahmen drawRect ");
+   NSLog(@"rKnopfRahmen drawRect ");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.6 green:1.0 blue:0.7 alpha:tabalpha];
@@ -114,7 +114,7 @@
    
    if(self.layer)
    {
-      //NSLog(@"rKnopfRahmen  layer");
+      NSLog(@"rKnopfRahmen  layer");
       //CGColorRef color = CGColorCreateGenericRGB(r, g, b, 1.0f);
       //self.layer.borderColor = color;
       //CGColorRelease(color);
@@ -126,7 +126,7 @@
 @implementation rAufgabeRahmen
 - (id)initWithFrame:(NSRect)frame
 {
-   //dLog("rAufgabeRahmen init");
+   //NSLog(@"rAufgabeRahmen init");
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
@@ -138,12 +138,13 @@
    
    
    TastenwertArray=[[NSMutableArray alloc]initWithCapacity:100];
+  // return self;
    int i;
    for (i=0;i<100;i++)
    {
       [TastenwertArray addObject:[NSNumber numberWithInt:0]];
    }
-   //dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
+   //NSLog(@"rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
    return self;
    
    /*
@@ -161,7 +162,7 @@
 {
    if ([[note userInfo]objectForKey:@"Tastenwerte"])
    {
-      //dLog("TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
+      //NSLog(@"TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
       //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
@@ -178,7 +179,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //dLog("rRahmen drawRect ");
+   //NSLog(@"rRahmen drawRect start");
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    [[NSColor grayColor]set];
@@ -207,6 +208,7 @@
    for(i=0;i<10;i++)//Zeile
    {
       int zeilenwert=0;
+      int feldwert=0;
       for (k=0;k<10;k++)//Kolonne
       {
          Tastenfeld.origin.x=k*d+offsetx;
@@ -230,18 +232,21 @@
                switch (mode)
                {
                   case 0: // Hundertertabelle
+                     feldwert=(10*(9-i))+(k+1);
                      zeilenwert+=(10*(9-i))+(k+1);
                      summe +=(10*(9-i))+(k+1);
                      //dLog("Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                   case 1: //Reihentabelle
+                     feldwert=(10*(9-i))+(k+1);
                      zeilenwert+=((10-i))*(k+1);
                      summe += ((10-i))*(k+1);
                      //dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
                      
                }//switch mode
-               [Kreis setLineWidth:1.6];
+               
+                [Kreis setLineWidth:1.6];
                [[NSColor blackColor]set];
                [Kreis stroke];
                
@@ -250,6 +255,7 @@
             {
                [Kreis setLineWidth:1.0];
                [[NSColor grayColor]set];
+               
                [Kreis stroke];
             }
          }
@@ -365,6 +371,7 @@
     [Ergebnisfeld setAlignment:NSRightTextAlignment];
     */
    [[NSColor blackColor]set];
+   //NSLog(@"rRahmen drawRect end");
 }
 
 
@@ -375,16 +382,12 @@
 @implementation rErgebnisRahmen
 - (id)initWithFrame:(NSRect)frame
 {
-   //dLog("rAufgabeRahmen init");
+   //NSLog(@"rErgebnisRahmen init");
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
-   [nc addObserver:self
-          selector:@selector(TastenwerteAktion:)
-              name:@"Tastenwerte"
-            object:nil];
    
-   
+  
    TastenwertArray=[[NSMutableArray alloc]initWithCapacity:100];
    
    int i;
@@ -393,7 +396,7 @@
       [TastenwertArray addObject:[NSNumber numberWithInt:0]];
    }
    //dLog("rAufgabeRahmen init Tastenwerte: %@",[TastenwertArray description]);
-   return self;
+   
    
    Wertarray=[[NSMutableArray alloc]initWithCapacity:10];
    for (i=0;i<10;i++)
@@ -401,14 +404,23 @@
       [Wertarray addObject:[NSNumber numberWithInt:0]];
    }
    
+  // nc=[NSNotificationCenter defaultCenter];
+   [nc addObserver:self
+          selector:@selector(TastenwerteAktion:)
+              name:@"Tastenwerte"
+            object:nil];
+
+ 
+   return self;
 }
 
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
+   //NSLog(@"rErgebnisRahmen Tastenwerteaktion");
    if ([[note userInfo]objectForKey:@"Tastenwerte"])
    {
-      //dLog("TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
+      //NSLog(@"TastenwerteAktion: note: %@",[[[note userInfo]objectForKey:@"Tastenwerte"]description]);
       NSArray* tempArray=[[note userInfo]objectForKey:@"Tastenwerte"];
       //dLog("TastenwerteAktion: tempArray: %@",[tempArray description]);
       
@@ -423,9 +435,301 @@
    
 }
 
+
+
 - (void)drawRect:(NSRect)rect
 {
-   //dLog("rRahmen drawRect ");
+   //NSLog(@"ErgebnisRahmen drawRect start");
+   //NSBezierPath p=[Aufgaberahmen path];
+   NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
+   [[NSColor grayColor]set];
+   [NSBezierPath strokeRect:r];
+   
+   
+   //[NSBezierPath strokeRect:rr];
+   
+   //dLog("rRahmen drawRect: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
+   //Tastenwerte=[[[NSArray alloc]init]retain];
+   int offsetx=40;
+   int offsety=32;
+   int durchmesser=22;
+   NSRect Tastenfeld=NSMakeRect(0,0,durchmesser,durchmesser);//[self bounds];
+   //Tastenfeld.size.width=20;
+   //Tastenfeld.size.height=20;
+   //Tastenfeld.origin.x=10;
+   //Tastenfeld.origin.y=10;
+   
+   //dLog("TastenmatrixRect: x: %d w: %2.2f",TastenmatrixRect.origin.x, TastenmatrixRect.size.width);
+   int i, k;
+   int d=26;
+   int kar=14;
+   int summe=0;
+   NSRect Wertfeld;
+   for(i=0;i<10;i++)//Zeile
+   {
+      int zeilenwert=0;
+      int feldwert=0;
+
+      for (k=0;k<10;k++)//Kolonne
+      {
+         Tastenfeld.origin.x=k*d+offsetx;
+         if (k>=5)
+            Tastenfeld.origin.x+=5;
+         Tastenfeld.origin.y=i*d+offsety;
+         if (i>=5)
+            Tastenfeld.origin.y+=5;
+         NSRect Kreisfeld=Tastenfeld;
+         Kreisfeld.origin.x+=2;
+         Kreisfeld.origin.y+=2;
+         NSBezierPath* Kreis=[NSBezierPath bezierPathWithOvalInRect:Kreisfeld];
+         //if ([TastenwertArray count]>(10*k)+i)
+         {
+            if ([[TastenwertArray objectAtIndex:(10*(i)+(k))]intValue])
+            {
+               //[[NSColor lightGrayColor]set];
+               NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.9 green:0.9 blue:0.9 alpha:tabalpha];
+               [FeldFarbe set];
+               [Kreis fill];
+               switch (mode)
+               {
+                  case 0: // Hundertertabelle
+                     feldwert=(10*(9-i))+(k+1);
+                     zeilenwert+=(10*(9-i))+(k+1);
+                     summe +=(10*(9-i))+(k+1);
+                     //DLog(@"Add zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     break;
+                  case 1: //Reihentabelle
+                     feldwert=((10-i))*(k+1);
+                     zeilenwert+=((10-i))*(k+1);
+                     summe += ((10-i))*(k+1);
+                     //DLog(@"Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+                     break;
+                     
+               }//switch mode
+               
+               //
+               NSPoint zahlpunkt=Kreisfeld.origin;;
+               zahlpunkt.y+=d/6.0;
+               zahlpunkt.x+=d/16.0;
+               //NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 9];
+               //NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:StundenFont forKey:NSFontAttributeName];
+               NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 12];
+               NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:ZahlFont forKey:NSFontAttributeName];
+               int offset=0;
+               NSString* ZahlString=[[NSNumber numberWithInt:feldwert]stringValue];
+               if (feldwert<100)
+               {
+                  offset+=3;
+                  if (feldwert<10)
+                  {
+                     offset+=3;
+                  }
+               }
+               zahlpunkt.x+=offset;
+               [ZahlString drawAtPoint:zahlpunkt withAttributes:ZahlAttrs];
+               
+
+               // end neu
+
+               [Kreis setLineWidth:1.6];
+               [[NSColor blackColor]set];
+               [Kreis stroke];
+               
+            }
+            //else
+            {
+               [Kreis setLineWidth:1.0];
+           //    [[NSColor grayColor]set];
+               [[NSColor redColor]set];
+               [Kreis stroke];
+               
+            }
+         }
+         /*
+          NSControl * Taste=[[NSControl alloc]initWithFrame:Tastenfeld];
+          //[Taste setControlType:NSRegularControlSize];
+          NSButtonCell* Zelle=[[NSButtonCell alloc]init];
+          [Zelle setTitle:@""];
+          [Taste setTag:k+ 10*(9-i)];
+          [Zelle setBordered:YES];
+          [Zelle setBordered:YES];
+          [Zelle setButtonType:NSOnOffButton];
+          [Zelle setBezelStyle: NSCircularBezelStyle];
+          [Taste setCell:Zelle];
+          [Taste setAction:@selector(Tastenaktion:)];
+          [Taste sizeToFit];
+          [Tastenarray addObject:Taste];
+          [self addSubview:Taste];
+          */
+      }//for k
+      //DLog(@"zeile: %d zeilenwert: %d",i, zeilenwert);
+      
+      
+      Wertfeld=Tastenfeld;
+      Wertfeld.origin.x+=2*d;
+      Wertfeld.origin.y+=8;
+      //   Wertfeld.size.height-=2;
+      Wertfeld.size.width=3*kar;
+      [NSBezierPath strokeRect:Wertfeld];
+      
+      NSPoint oben=Wertfeld.origin;
+      oben.y+=Wertfeld.size.height;
+      oben.x+=kar;
+      NSPoint unten=Wertfeld.origin;;
+      NSTextField* Zeilenwertfeld=[[NSTextField alloc]initWithFrame:Wertfeld];
+      Zeilenwertfeld.editable = NO;
+      [Zeilenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 14]];
+      [[self superview]addSubview:Zeilenwertfeld];
+      [Zeilenwertfeld setAlignment:NSTextAlignmentRight];
+      
+      if (zeilenwert)
+      {
+         [Zeilenwertfeld setIntValue:zeilenwert];
+         //NSString* wertString=[[NSNumber numberWithInt:zeilenwert]stringValue];
+         //[wertString drawInRect:Wertfeld withAttributes:NULL];
+      }
+      else
+      {
+         
+         [Zeilenwertfeld setStringValue:@""];
+      }
+      summe+=zeilenwert;
+
+      
+      
+      
+      
+      
+      unten.x+=kar;
+      NSBezierPath* KarPath=[NSBezierPath bezierPath]; // senkrechte Linie in Zilenwertfeld
+      [[NSColor lightGrayColor]set];
+      [[NSColor blueColor]set];
+      [KarPath moveToPoint:oben];
+      [KarPath lineToPoint:unten];
+      //
+      unten.x+=kar;
+      oben.x+=kar;
+      [KarPath moveToPoint:oben];
+      [KarPath lineToPoint:unten];
+      
+      //[KarPath stroke];
+      
+      /*
+      Wertfeld=Tastenfeld;
+      Wertfeld.origin.x+=2*d;
+      Wertfeld.origin.y+=3;
+      //Wertfeld.size.height-=2;
+      Wertfeld.size.width*=2;
+      //[NSBezierPath strokeRect:Wertfeld];
+      NSTextField* Zeilenwertfeld=[[NSTextField alloc]initWithFrame:Wertfeld];
+      [Zeilenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 12]];
+
+      [self addSubview:Zeilenwertfeld];
+      [Zeilenwertfeld setAlignment:NSTextAlignmentRight];
+      
+      if (zeilenwert)
+      {
+         [Zeilenwertfeld setIntValue:zeilenwert];
+         //NSString* wertString=[[NSNumber numberWithInt:zeilenwert]stringValue];
+         //[wertString drawInRect:Wertfeld withAttributes:NULL];
+      }
+      else
+      {
+         
+         [Zeilenwertfeld setStringValue:@""];
+      }
+      
+*/
+      summe+=zeilenwert;
+   }//for i
+   //Wertfeld=Tastenfeld;
+   Wertfeld.origin.x=11*d+offsetx+5;
+   Wertfeld.origin.y=5;
+   //Wertfeld.size.height-=2;
+   Wertfeld.size.width=3*kar;
+   if (summe >999)
+   {
+      Wertfeld.origin.x -= kar;
+      Wertfeld.size.width +=kar;
+   }
+   [[NSColor grayColor]set];
+   [NSBezierPath strokeRect:Wertfeld];
+   
+   NSTextField* Summenwertfeld=[[NSTextField alloc]initWithFrame:Wertfeld];
+   [Summenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 16]];
+   Summenwertfeld.editable = NO;
+   [[self superview] addSubview:Summenwertfeld];
+   [Summenwertfeld setAlignment:NSTextAlignmentRight];
+   if (summe)
+   {
+      [Summenwertfeld setIntValue:summe];
+   }
+   else
+   {
+      [Summenwertfeld setStringValue:@""];
+   }
+
+   
+   int delta=10;
+   NSPoint links=Wertfeld.origin;
+   links.y+=Wertfeld.size.height+4;
+   links.x-=delta;
+   NSPoint rechts=links;
+   rechts.x += 3*kar+delta+delta;
+   if (summe >999)
+   {
+      rechts.x += kar;
+   }
+   NSBezierPath* StrichPath=[NSBezierPath bezierPath];
+   [StrichPath moveToPoint:links];
+   [StrichPath lineToPoint:rechts];
+   [[NSColor darkGrayColor]set];
+   [StrichPath stroke];
+   
+   
+   NSPoint oben=Wertfeld.origin;
+   oben.y+=Wertfeld.size.height;
+   oben.x+=kar;
+   NSPoint unten=Wertfeld.origin;;
+   unten.x+=kar;
+   NSBezierPath* KarPath=[NSBezierPath bezierPath];
+   [[NSColor lightGrayColor]set];
+   [KarPath moveToPoint:oben];
+   [KarPath lineToPoint:unten];
+   
+   //
+   unten.x+=kar;
+   oben.x+=kar;
+   [KarPath moveToPoint:oben];
+   [KarPath lineToPoint:unten];
+//  [KarPath stroke];
+   if (summe >999)
+   {
+      unten.x+=kar;
+      oben.x+=kar;
+      [KarPath moveToPoint:oben];
+      [KarPath lineToPoint:unten];
+ //     [KarPath stroke];
+      
+   }
+   
+   /*
+    NSPoint w=[Ergebnisfeld frame].origin;
+    w.x =Tastenfeld.origin.x;
+    w.x+=3*d;
+    [Ergebnisfeld setFrameOrigin:w];
+    //[Tastenmatrixfeld addSubview:Tastenmatrix];
+    
+    [Ergebnisfeld setAlignment:NSRightTextAlignment];
+    */
+   [[NSColor blackColor]set];
+  // NSLog(@"ErgebnisRahmen drawRect end");
+}
+
+- (void)drawRect_a:(NSRect)rect
+{
+   //NSLog(@"ErgebnisRahmen drawRect start");
+   
    //NSBezierPath p=[Aufgaberahmen path];
    NSRect r=[self bounds];//NSMakeRect(20,40,20,20);
    [[NSColor grayColor]set];
@@ -450,16 +754,19 @@
    {
       [Wertarray addObject:[NSNumber numberWithInt:0]];
    }
-   
+//   return;
    int d=26;
    
    NSRect Wertfeld;
+   
    for(i=0;i<10;i++)//Zeile
    {
+      
       int zeilenwert=0;
       int feldwert=0;
       for (k=0;k<10;k++)//Kolonne
       {
+         
          Tastenfeld.origin.x=k*d+offsetx;
          if (k>=5)
             Tastenfeld.origin.x+=5;
@@ -471,12 +778,14 @@
          Kreisfeld.origin.y+=2;
          NSBezierPath* Kreis=[NSBezierPath bezierPathWithOvalInRect:Kreisfeld];
          //if ([TastenwertArray count]>(10*k)+i)
+         
          {
             if ([[TastenwertArray objectAtIndex:(10*(i)+(k))]intValue])
             {
                NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.9 green:0.9 blue:0.9 alpha:tabalpha];
                [FeldFarbe set];
                [Kreis fill];
+               
                switch (mode)
                {
                   case 0: // Hundertertabelle
@@ -490,14 +799,18 @@
                      zeilenwert+=((10-i))*(k+1);
                      //dLog("Mult zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
                      break;
-                     
+                  default:
+                  {
+                     break;
+                  }
                }//switch mode
+               
                NSPoint zahlpunkt=Kreisfeld.origin;;
                zahlpunkt.y+=d/6.0;
                zahlpunkt.x+=d/16.0;
                //NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 9];
                //NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:StundenFont forKey:NSFontAttributeName];
-               NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 12];
+               NSFont* ZahlFont=[NSFont fontWithName:@"Helvetica" size: 14];
                NSDictionary* ZahlAttrs=[NSDictionary dictionaryWithObject:ZahlFont forKey:NSFontAttributeName];
                int offset=0;
                NSString* ZahlString=[[NSNumber numberWithInt:feldwert]stringValue];
@@ -509,6 +822,7 @@
                      offset+=3;
                   }
                }
+               
                zahlpunkt.x+=offset;
                [ZahlString drawAtPoint:zahlpunkt withAttributes:ZahlAttrs];
                
@@ -518,17 +832,24 @@
                //zeilenwert+=((10-i))*(k+1);
                //[wertString setIntValue:zeilenwert];
                //dLog("zeile: %d kolonne: %d zeilenwert: %d",i,k,  zeilenwert);
+               [Kreis setLineWidth:1.6];
                [[NSColor blackColor]set];
                [Kreis stroke];
+               
             }
             else
             {
+               [Kreis setLineWidth:1.0];
                [[NSColor lightGrayColor]set];
+               
                [Kreis stroke];
+               
             }
          }
+          
       }//for k
       //dLog("zeile: %d zeilenwert: %d",i, zeilenwert);
+      
       Wertfeld=Tastenfeld;
       Wertfeld.origin.x+=2*d;
       Wertfeld.origin.y+=3;
@@ -536,9 +857,9 @@
       Wertfeld.size.width*=2;
       //[NSBezierPath strokeRect:Wertfeld];
       NSTextField* Zeilenwertfeld=[[NSTextField alloc]initWithFrame:Wertfeld];
-      [Zeilenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 12]];
+      [Zeilenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 14]];
       
-      [self addSubview:Zeilenwertfeld];
+      [[self superview] addSubview:Zeilenwertfeld];
       [Zeilenwertfeld setAlignment:NSTextAlignmentRight];
       
       if (zeilenwert)
@@ -553,7 +874,9 @@
          [Zeilenwertfeld setStringValue:@""];
       }
       summe+=zeilenwert;
+          
    }//for i
+   return;
    //Wertfeld=Tastenfeld;
    Wertfeld.origin.x=11*d+offsetx;
    Wertfeld.origin.y=5;
@@ -563,7 +886,7 @@
    NSTextField* Summenwertfeld=[[NSTextField alloc]initWithFrame:Wertfeld];
    [Summenwertfeld setFont:[NSFont fontWithName:@"Helvetica" size: 14]];
    
-   [self addSubview:Summenwertfeld];
+   [[self superview] addSubview:Summenwertfeld];
    [Summenwertfeld setAlignment:NSTextAlignmentRight];
    if (summe)
    {
@@ -600,6 +923,8 @@
     [Ergebnisfeld setAlignment:NSRightTextAlignment];
     */
    [[NSColor blackColor]set];
+   //NSLog(@"ErgebnisRahmen drawRect end");
+
 }
 
 
@@ -613,6 +938,7 @@
    self=[super initWithFrame:frame];
    NSNotificationCenter * nc;
    nc=[NSNotificationCenter defaultCenter];
+   
    [nc addObserver:self
           selector:@selector(TastenwerteAktion:)
               name:@"Tastenwerte"
@@ -623,7 +949,8 @@
 }
 - (void)awakeFromNib
 {
-   
+   //NSLog(@"Druckfeld  awake");
+
    NSDateFormatter *datumformat = [[NSDateFormatter alloc] init];
    [datumformat setLocale:[NSLocale currentLocale]];
    [datumformat setDateFormat:@"dd.MM.yyyy"];
@@ -652,25 +979,26 @@
 
 - (void)drawRect:(NSRect)rect
 {
-   //dLog("Arbeitsblatt Druckfeld drawRect ");
+   //NSLog(@"Druckfeld drawRect start");
+
    //NSBezierPath p=[Aufgaberahmen path];
    NSColor* FeldFarbe=[NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.7 alpha:tabalpha];
    [FeldFarbe set];
    [[NSColor blackColor]set];
-   [NSBezierPath strokeRect:[Gruppefeld frame]];
+//   [NSBezierPath strokeRect:[Gruppefeld frame]];
    //[NSBezierPath fillRect:Grupperahmen];
    //[NSBezierPath strokeRect:r];
    NSRect r=[Gruppefeld bounds];
    r.size.width -=2;
-   [NSBezierPath strokeRect:r];
+//   [NSBezierPath strokeRect:r];
    //dLog("Druckfeld drawRect Grupperahmen: Rect: origin.x %2.2f origin.y: %2.2f  size.height: %2.2f size.width: %2.2f",r.origin.x, r.origin.y, r.size.height, r.size.width);
-   
+   //NSLog(@"Druckfeld drawRect end");
 }
 
 
 - (void) TastenwerteAktion:(NSNotification*)note
 {
-   //dLog("AB Druckfeld TastenwerteAktion note: %@",[[note userInfo]description]);
+   //DLog(@"AB Druckfeld TastenwerteAktion note: %@",[[note userInfo]description]);
    DruckdatenDic = [NSDictionary dictionaryWithDictionary:[note userInfo]];
    if ([[note userInfo]objectForKey:@"Anzahl"] && [[[note userInfo]objectForKey:@"Anzahl"]intValue])
    {
@@ -725,9 +1053,17 @@
 - (id)init
 {
    self=[super initWithWindowNibName:@"Arbeitsblatt"];
-   //dLog("rArbeitsblatt ");
+   //NSLog(@"rArbeitsblatt init");
    
+   NSNotificationCenter * nc;
+  
+   nc=[NSNotificationCenter defaultCenter];
    
+   [nc addObserver:self
+          selector:@selector(AnzahlKopienAktion:)
+              name:@"anzahlkopien"
+            object:nil];
+
    // Add your subclass-specific initialization here.
    // If an error occurs here, send a [self release] message and return nil.
    
@@ -736,15 +1072,8 @@
 
 - (void)awakeFromNib
 {
-   //dLog("Arbeitsblatt awake");
-   NSNotificationCenter * nc;
-   nc=[NSNotificationCenter defaultCenter];
-   
-   [nc addObserver:self
-          selector:@selector(AnzahlKopienAktion:)
-              name:@"anzahlkopien"
-            object:nil];
-   
+   //NSLog(@"Arbeitsblatt awake");
+    
    int rot=0;
    int gruen=236;
    int blau=0;
@@ -775,14 +1104,14 @@
    CGColorSpaceRef hgcolorSpace = [[hintergrundfarbe colorSpace] CGColorSpace];
    [hintergrundfarbe getComponents:(CGFloat *)&hgcomponents];
    CGColorRef hintergrundGCfarbe = CGColorCreate(hgcolorSpace, hgcomponents);
-
-   
+ //  [[[self window] contentView] addSubview:Druckfeld];
+  // [[self window]makeKeyAndOrderFront:NULL];
    //[Knopfrahmen setWantsLayer:YES];
   // Knopfrahmen.layer.borderWidth=2.0;
   
    //[Knopfrahmen.layer setBackgroundColor:[[NSColor yellowColor] CGColor]];
   // Knopfrahmen.layer.borderColor = [rahmenfarbe CGColor];
-   
+ //  Druckfeld = [[rDruckfeld alloc]init];
 }
 - (void)clearDouble
 {
@@ -838,7 +1167,7 @@
 {
    //dLog("AnzahlKopienAktion: note: %@",[note userInfo]);
    AnzahlKopien = [[[note userInfo]objectForKey:@"morecopies"]intValue];
-   return;
+//   return;
    
    
    
@@ -854,12 +1183,13 @@
    {
       AnzahlKopien++;
    }
-   AnzahlKopien /=2;
+   AnzahlKopien /=2; // A4, 2 Blaetter
    
    //dLog("AnzahlKopienAktion AnzahlKopien: %d",AnzahlKopien);
    NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    [NotificationDic setObject:[NSNumber numberWithInt:AnzahlKopien] forKey:@"anzahlkopien"];
-   [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
+   
+ //  [NotificationDic setObject:[Druckfeld druckdatenDic] forKey:@"druckdatendic"];
    
    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
    //   [nc postNotificationName:@"DoubleTastenwerte" object:self userInfo:NotificationDic];
@@ -956,10 +1286,10 @@
 
 - (void)printOperationDidRun:(NSPrintOperation *)printOperation  success:(BOOL)success  contextInfo:(void *)contextInfo
 {
-   DLog(@"printOperationDidRun success: %d",success);
+   //DLog(@"printOperationDidRun success: %d",success);
    if (success)
    {
-      DLog(@"printOperationDidRun ");
+      //DLog(@"printOperationDidRun ");
       NSMutableDictionary* NotificationDic=[[NSMutableDictionary alloc]initWithCapacity:0];
       
       NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
@@ -1006,12 +1336,12 @@
 - (void)BlattDruckenMitDicArray:(NSArray*)derProjektDicArray
 {
    
-   //NSTextView* DruckView=[[[NSTextView alloc]init]autorelease];
+   NSTextView* DruckView=[[NSTextView alloc]init];
    //DLog (@"Kommentar: BlattDruckenMitDicArray ProjektDicArray: %@",[derProjektDicArray description]);
    NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
    //DLog (@"BlattDruckenMitDicArray PrintInfo: %@",PrintInfo);
    
-   [PrintInfo setOrientation:NSPortraitOrientation];
+   [PrintInfo setOrientation:NSPaperOrientationPortrait];
    [PrintInfo setHorizontalPagination: NSAutoPagination];
    [PrintInfo setVerticalPagination: NSAutoPagination];
    

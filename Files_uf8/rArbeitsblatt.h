@@ -92,11 +92,11 @@
    IBOutlet	NSTextField*			ErgebnisNummerfeld;
    IBOutlet	NSTextField*			ErgebnisTitelfeld;
    IBOutlet	rRahmen*             ErgebnisTitelrahmen;
-   //IBOutlet	rErgebnisRahmen*		Ergebnisrahmen;
+   IBOutlet	rErgebnisRahmen*		Ergebnisrahmen;
    NSRect Grupperahmen, Datumrahmen, Namerahmen, Nummerrahmen;
    NSDictionary*                 DruckdatenDic;
 }
-- (NSDictionary*)druckdatenDic;
+- (NSDictionary*)   druckdatenDic; // get
 @end
 
 
@@ -109,8 +109,9 @@
    rEinstellungenFenster*			EinstellungenFenster;
    rEinstellungenSheet*				EinstellungenSheet;
    rArbeitsblatt_double*			Arbeitsblattfenster_double;
-     IBOutlet	rKnopfRahmen*             Knopfrahmen;
+   IBOutlet	rKnopfRahmen*        Knopfrahmen;
    int									AnzahlKopien;
+   
    
    NSString*            heuteDatumString;
 }

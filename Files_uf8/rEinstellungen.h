@@ -52,16 +52,17 @@
    IBOutlet NSDrawer*         SettingDrawer;
    
    rVorlage*                  Vorlagefenster;
-   rArbeitsblatt*             Arbeitsblattfenster;
    NSMutableDictionary*       PList;
    
 }
 @property NSWindow* window;
+@property  (nonatomic, strong)rArbeitsblatt*             Arbeitsblattfenster;
+
 
 - (IBAction)setMode:(id)sender;
 - (IBAction)setWert:(id)sender;
 - (IBAction)showVorlage:(id)sender;
-- (IBAction)clearTasten:(id)sender;
+- (IBAction)clearTasten:(id)sender; 
 - (IBAction)reportMoreCopies:(id)sender;
 - (IBAction)showEinstellungen:(id)sender;
 - (void)reCalc;

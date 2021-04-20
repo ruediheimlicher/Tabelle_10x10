@@ -425,7 +425,7 @@ r.size.width -=2;
 
 - (void)printSerie:(NSDictionary*)druckdaten
 {
-   DLog(@"Arbeitsblatt_double printSerie druckdaten: %@",druckdaten);
+   //DLog(@"Arbeitsblatt_double printSerie druckdaten: %@",druckdaten);
    printDic=[NSDictionary dictionaryWithObject:druckdaten forKey:@"druckdaten"];
    [self BlattDruckenMitDic:printDic];
 }
@@ -454,7 +454,7 @@ DruckKnopf.hidden = NO;
 	//DLog (@"Arbeitsblatt double Serie: BlattDruckenMitDic: %@",[derPrintDic description]);
 	NSPrintInfo* PrintInfo=[NSPrintInfo sharedPrintInfo];
 	
-	[PrintInfo setOrientation:NSPortraitOrientation];
+   [PrintInfo setOrientation:NSPaperOrientationPortrait];
 	[PrintInfo setHorizontalPagination: NSAutoPagination];
 	[PrintInfo setVerticalPagination: NSAutoPagination];
 

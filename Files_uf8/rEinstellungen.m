@@ -166,11 +166,12 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
                          stringByAppendingPathComponent:@"Documents"]
                         stringByAppendingPathComponent:@"TabData"];
    
+  
    [Nummerfeld setDelegate:self];
    BOOL istOrdner=NO;
    if ([Filemanager fileExistsAtPath:PListPfad isDirectory:&istOrdner]&& istOrdner)
    {
-      DLog(@"PList-Ordner da");
+      //DLog(@"PList-Ordner da");
       if ([Filemanager fileExistsAtPath:[PListPfad stringByAppendingPathComponent:@"TabPList"]])
       {
          [PList setDictionary:[NSMutableDictionary dictionaryWithContentsOfFile:[PListPfad stringByAppendingPathComponent:@"TabPList"]]];
@@ -205,7 +206,7 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
       [tempGruppenDic setObject:[NSNumber numberWithInt:1]forKey:@"F"];
       [PList setObject:tempGruppenDic forKey:@"gruppendic"];
    }
-   DLog(@"read PList: %@",[PList description]);
+   //DLog(@"read PList: %@",[PList description]);
    if ([PList objectForKey:@"lastgruppe"])
    {
       if ([[PList objectForKey:@"gruppendic"]objectForKey:[PList objectForKey:@"lastgruppe"]])
@@ -341,11 +342,11 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    
    NSString* heuteDatumString = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];//  12.09.2015 
    [Datumfeld setStringValue:heuteDatumString];
-
+   
    
    //[ModeSeg selectSegmentWithTag:0];
-   int erfolg=[self makeFirstResponder:NULL];
-   NSURLRequest* Anfrage=[NSURLRequest requestWithURL:[NSURL URLWithString:@"www.duernten.ch"]];
+//   int erfolg=[self makeFirstResponder:NULL];
+//   NSURLRequest* Anfrage=[NSURLRequest requestWithURL:[NSURL //URLWithString:@"www.duernten.ch"]];
    //DLog(@"Header: %@",[[Anfrage allHTTPHeaderFields]description]);
    
    //self.window.backgroundColor = NSColor.whiteColor;
@@ -356,18 +357,30 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    Gruppefeld.toolTip = NSLocalizedString(@"Gruppefeld", nil);
    ClearTaste.toolTip = NSLocalizedString(@"ClearTaste", nil);
    ModeSeg.toolTip = NSLocalizedString(@"ModSeg", nil);
+
+
+ 
+   if (![self Arbeitsblattfenster])
+     {
+        self.Arbeitsblattfenster=[[rArbeitsblatt alloc]init];
+        
+     }
+
+
+
+
 }
 
 - (IBAction)showArbeitsblatt:(id)sender
 {
    //DLog(@"showVorlage: ");
    
-   if (!Arbeitsblattfenster)
+   if (!self.Arbeitsblattfenster)
 	  {
-        Arbeitsblattfenster=[[rArbeitsblatt alloc]init];
+        self.Arbeitsblattfenster=[[rArbeitsblatt alloc]init];
         
      }
-   [Arbeitsblattfenster showWindow:self];
+   [self.Arbeitsblattfenster showWindow:self];
    
 }
 
@@ -437,7 +450,7 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    int status = [[note.object objectForKey:@"status"]intValue];
    // DLog(@"MatrixTasteAktion: %d, zeile: %d kolonne: %d status: %d",tastentag, zeile, kolonne,status);
    int zeilenwert=[[Wertarray objectAtIndex:9-zeile]intValue];
-   int add;
+   int add=0;
    switch ([ModeSeg selectedSegment])
    {
       case 0://Hundertertabelle
@@ -469,7 +482,11 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    {
       [[Wertarray objectAtIndex:9-zeile]setStringValue:@""];
    }
-   
+   //NSLog(@"Wertarray: %@",Wertarray.description);
+   for (int i=0;i<10;i++)
+   {
+      //NSLog(@"Wertarrayindex: %d: %@",i,[[Wertarray objectAtIndex:i]stringValue]);
+   }
    int ergebnis=[Ergebnisfeld intValue];
    if ((ergebnis+add) > 0)
    {
@@ -511,7 +528,7 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    int kolonne=[sender tag]%10 ;
    //DLog(@"Taste: %d, zeile: %d kolonne: %d state: %d",[sender tag], zeile, kolonne,[[sender cell]state]);
    int zeilenwert=[[Wertarray objectAtIndex:9-zeile]intValue];
-   int add;
+   int add=0;
    switch ([ModeSeg selectedSegment])
    {
       case 0://Hundertertabelle
@@ -715,23 +732,34 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
 - (IBAction)goArbeitsblatt:(id)sender
 {
    
-   if (!Arbeitsblattfenster)
+   if (![self Arbeitsblattfenster])
 	  {
-        Arbeitsblattfenster=[[rArbeitsblatt alloc]init];
-        
+        self.Arbeitsblattfenster=[[rArbeitsblatt alloc]init];
      }
-   [Arbeitsblattfenster showWindow:self];
    
-   [Arbeitsblattfenster clearDouble];
+   [self.Arbeitsblattfenster showWindow:self];
+   //return; 
+   [self.Arbeitsblattfenster clearDouble];
    
    NSMutableDictionary* MatrixDic=[[NSMutableDictionary alloc]initWithCapacity:0];
    NSMutableArray* stateArray=[[NSMutableArray alloc]initWithCapacity:0];
+  
    int i;
    for (i=0;i<100;i++)
    {
+      
       [stateArray addObject:[NSNumber numberWithInt:[(rKnopf*)[Tastenarray objectAtIndex:i]status]]];
       
    }//for i
+//   NSLog(@"stateArray: %@",stateArray);
+   /*
+   for (i=0;i<100;i++)
+   {
+      int knopf = [(rKnopf*)[Tastenarray objectAtIndex:i]status];
+      NSLog(@"i: %d Knopfstatus: %d",i,knopf);
+      
+   }//for i
+*/
    [MatrixDic setObject:stateArray forKey:@"Tastenwerte"];
    [MatrixDic setObject:[Gruppefeld stringValue] forKey:@"Gruppe"];
    [MatrixDic setObject:[NSNumber numberWithInt:[Nummerfeld intValue]] forKey:@"Nummer"];
@@ -744,11 +772,14 @@ void dLog(char*string ) // debug, nur bei SHOWLOG zeigen
    [nc postNotificationName:@"Tastenwerte" object:self userInfo:MatrixDic];
    
    NSMutableDictionary* moreCopiesDic = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithLong:[morecopies state]] forKey:@"morecopies"];
-   [nc postNotificationName:@"anzahlkopien" object:self userInfo:moreCopiesDic];
+//   [nc postNotificationName:@"anzahlkopien" object:self userInfo:moreCopiesDic];
    
    [[PList objectForKey:@"gruppendic"]setObject:[NSNumber numberWithInt:[Nummerfeld intValue]]forKey:[Gruppefeld stringValue]];
-}
-
+   
+   double delayInSeconds = 1.0;
+ //  [NSThread sleepForTimeInterval: delayInSeconds];
+   
+    }
 
 - (IBAction)goVorlage:(id)sender
 {
